@@ -1,0 +1,32 @@
+I"�	<p>Before you dive into this book, you should have a solid working proficiency over JavaScript up to the most recent standard (at the time of this writing), which is commonly called ES5 (technically ES 5.1). Here, we plan to talk squarely about the upcoming ES6, as well as cast our vision beyond to understand how JS will evolve moving forward.</p>
+
+<p>If you are still looking for confidence with JavaScript, I highly recommend you read the other titles in this series first:</p>
+
+<p>Up &amp; Going: Are you new to programming and JS? This is the roadmap you need to consult as you start your learning journey.</p>
+
+<ul>
+  <li>Up &amp; Going</li>
+  <li>Scope &amp; Closures</li>
+  <li>this &amp; Object Prototypes</li>
+  <li>Types &amp; Grammar</li>
+  <li>Async &amp; Performance</li>
+</ul>
+
+<p><a href="/assets/images/rails.jpg"><img src="/assets/images/rails.jpg" alt="railroad" /></a></p>
+
+<p>If you’ve already read all those titles and you feel pretty comfortable with the topics they cover, it’s time we dive into the evolution of JS to explore all the changes coming not only soon but farther over the horizon.</p>
+
+<h2 id="let-declarations"><code class="language-plaintext highlighter-rouge">let</code> Declarations</h2>
+
+<p>However, we can now create declarations that are bound to any block, called (unsurprisingly) <em>block scoping</em>. This means all we need is a pair of <code class="language-plaintext highlighter-rouge">{ .. }</code> to create a scope. Instead of using var, which always declares variables attached to the enclosing function (or global, if top level) scope, use <code class="language-plaintext highlighter-rouge">let</code>:</p>
+
+<figure class="highlight"><pre><code class="language-js" data-lang="js"><span class="kd">var</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">2</span><span class="p">;</span>
+
+<span class="p">{</span>
+    <span class="kd">let</span> <span class="nx">a</span> <span class="o">=</span> <span class="mi">3</span><span class="p">;</span>
+    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">a</span> <span class="p">);</span>   <span class="c1">// 3</span>
+<span class="p">}</span>
+
+<span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span> <span class="nx">a</span> <span class="p">);</span>       <span class="c1">// 2</span></code></pre></figure>
+
+:ET

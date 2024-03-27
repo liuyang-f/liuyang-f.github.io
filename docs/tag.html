@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html data-color-mode="light" data-dark-theme="dark" data-light-theme="light" lang="zh-CN">
+<html data-color-mode="light" data-dark-theme="dark_colorblind" data-light-theme="light" lang="zh-CN">
 <head>
     <meta content="text/html; charset=utf-8" http-equiv="content-type" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0">
@@ -12,8 +12,8 @@
         else if(localStorage.getItem("meek_theme")=="light"){document.getElementsByTagName("html")[0].attributes.getNamedItem("data-color-mode").value="light";}
     </script>
     
-<meta name="description" content="Blog Title search page">
-<title>Blog Title - Tag</title>
+<meta name="description" content="千金散尽还复来 search page">
+<title>千金散尽还复来 - Tag</title>
 
 </head>
 <style>
@@ -58,7 +58,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
             <path id="searchSVG" fill-rule="evenodd"></path>
         </svg>
     </div>
-    <a href="https://liuyang-f.github.io/Lyang.github.io"><button id="buttonHome" class="btn btn-invisible circle" title="首页">
+    <a href="https://liuyang-f.github.io"><button id="buttonHome" class="btn btn-invisible circle" title="首页">
         <svg class="octicon" width="16" height="16">
             <path id="pathHome" fill-rule="evenodd"></path>
         </svg>
@@ -75,15 +75,15 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <nav class="SideNav"></nav>
 <div class="notFind" style="display:none;font-size:24px;margin:8px;">Not Find</div>
 </div>
-    <div id="footer">Copyright © <span id="year"></span><a href="https://liuyang-f.github.io/Lyang.github.io"> Blog Title </a>
+    <div id="footer">Copyright © <span id="year"></span><a href="https://liuyang-f.github.io"> 千金散尽还复来 </a>
 <p>
 <span id="runday"></span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a>
 </p>
 
 <script>
-if(""!=""){
+if("03/27/2024"!=""){
     var now=new Date();
-    var startSite=new Date("");
+    var startSite=new Date("03/27/2024");
     var diff=now.getTime()-startSite.getTime();
     var diffDay=Math.floor(diff/(1000*60*60*24));
     document.getElementById("year").innerHTML=now.getFullYear();
@@ -221,7 +221,7 @@ function setClassDisplay(lable){
     let lists = document.getElementsByClassName("lists");
     let tagTitle = document.getElementsByClassName("tagTitle")[0];
     tagTitle.innerHTML="Tag #"+lable;
-    document.title=lable+" - Blog Title";
+    document.title=lable+" - 千金散尽还复来";
     document.getElementsByClassName("subnav-search-input")[0].value='';
     if(lable=="All"){
         for(let i = 0; i < lists.length; i++){lists[i].style.display='block';}
@@ -249,8 +249,8 @@ function searchShow(){
     let tagTitle = document.getElementsByClassName("tagTitle")[0];
     let searchInput = document.getElementsByClassName("subnav-search-input")[0].value;
     tagTitle.innerHTML="Search #"+searchInput;
-    if(searchInput==''){document.title="Search - Blog Title";}
-    else{document.title=searchInput+" - Blog Title";}
+    if(searchInput==''){document.title="Search - 千金散尽还复来";}
+    else{document.title=searchInput+" - 千金散尽还复来";}
     let a=0;
     window.location.hash="#"+(searchInput);
     for(let i = 0; i < lists.length; i++){

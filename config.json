@@ -11,5 +11,6 @@
     "i18n":"CN",
     "UTC":8,
     "dayTheme":"light",
-    "nightTheme":"dark_colorblind"
+    "nightTheme":"dark_colorblind",
+    "style":"<style>#postBody{font-size:20px}</style>"
 }

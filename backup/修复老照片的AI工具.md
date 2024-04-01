@@ -11,8 +11,12 @@
 github开源项目【[点击前往](https://github.com/sczhou/CodeFormer)】
 使用该项目，需要依赖 cuda 和 pytorch，安装【[参考](https://developer.aliyun.com/article/1062107)】。
 
-**依赖一：安装 python**
-官网入口 【[点击前往](https://www.python.org/downloads)】
+**依赖一：安装 conda**
+conda 分为 anaconda（包含许多库的集合版本） 和 miniconda（精简版本：只包含 conda、pip、zlib、python 以及它们所需要的包）。
+【[python 官网](https://www.python.org/downloads)】
+【[miniconda 官网](https://docs.anaconda.com/free/miniconda)】
+【[anaconda官网](https://www.anaconda.com/download)】
+
 
 **依赖二：安装 cuda** 
 1. 官网入口 【[点击前往](https://developer.nvidia.com/cuda-downloads)】

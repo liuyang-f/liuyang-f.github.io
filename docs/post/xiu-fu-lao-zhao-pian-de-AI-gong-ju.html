@@ -75,7 +75,24 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <p>1.CodeFormer 【<a href="https://huggingface.co/spaces/sczhou/CodeFormer" rel="nofollow">点击前往</a>】</p>
 <p>2.GFPGAN【<a href="https://huggingface.co/spaces/akhaliq/GFPGAN" rel="nofollow">点击前往</a>】</p>
 <p><strong>方案二：自建更强大的 AI照片、视频修复工具，依靠自身系统硬件，速度快，功能多效果好，可玩性高！<em>不仅修复照片，也可以（高清修复视频）</em>！</strong></p>
-<p>github开源项目【<a href="https://github.com/sczhou/CodeFormer">点击前往</a>】</p></div>
+<p>github开源项目【<a href="https://github.com/sczhou/CodeFormer">点击前往</a>】<br>
+使用该项目，需要依赖 cuda 和 pytorch，安装【<a href="https://developer.aliyun.com/article/1062107#slide-4" rel="nofollow">参考</a>】。</p>
+<p><strong>依赖一：安装 python</strong><br>
+官网入口 【<a href="https://www.python.org/downloads" rel="nofollow">点击前往</a>】</p>
+<p><strong>依赖二：安装 cuda</strong></p>
+<ol>
+<li>官网入口 【<a href="https://developer.nvidia.com/cuda-downloads" rel="nofollow">点击前往</a>】</li>
+<li>查看版本的命令<br>
+<code class="notranslate">命令1：nvcc -V </code><br>
+<code class="notranslate">命令2：nvidia-smi</code></li>
+</ol>
+<p><strong>依赖三：安装 pytorch</strong></p>
+<ol>
+<li>官网入口 【<a href="https://pytorch.org" rel="nofollow">点击前往</a>】</li>
+<li>测试方法，进入 python 环境，执行以下测试 code，返回 True，即为成功；<br>
+<code class="notranslate">import torch</code><br>
+<code class="notranslate">torch.cuda.is_available()</code></li>
+</ol></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
 <div class="comments" id="comments"></div>

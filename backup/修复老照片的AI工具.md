@@ -9,7 +9,7 @@
 **方案二：自建更强大的 AI照片、视频修复工具，依靠自身系统硬件，速度快，功能多效果好，可玩性高<font color=red>！_不仅修复照片，也可以（高清修复视频）_！</font>**
 
 github开源项目【[点击前往](https://github.com/sczhou/CodeFormer)】
-使用该项目，需要依赖 cuda 和 pytorch，安装【[参考](https://developer.aliyun.com/article/1062107#slide-4)】。
+使用该项目，需要依赖 cuda 和 pytorch，安装【[参考](https://developer.aliyun.com/article/1062107)】。
 
 **依赖一：安装 python**
 官网入口 【[点击前往](https://www.python.org/downloads)】

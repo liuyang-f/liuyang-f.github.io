@@ -1,3 +1,5 @@
+_**原文链接：【[点击跳转](https://zhuanlan.zhihu.com/p/542115773)】**_
+
 ### **5种顺序容器+3种容器适配器+8种关联容器**
 > 顺序容器：array、vector、deque、list、forward_list。
 关联容器：map、multimap、

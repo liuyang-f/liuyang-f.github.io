@@ -1,4 +1,4 @@
-原文链接：【[点击前往](https://www.freedidi.com/11907.html)】
+原文链接：【[链接一](https://www.freedidi.com/11907.html)】【[链接二](https://www.freedidi.com/7749.html)】
 
 **方案一：免费的修复平台，优点是即开即用，完全免费，缺点是速度有点慢，功能有限。**
 
@@ -13,6 +13,7 @@ github开源项目【[点击前往](https://github.com/sczhou/CodeFormer)】
 
 **依赖一：安装 conda**
 conda 分为 anaconda（包含许多库的集合版本） 和 miniconda（精简版本：只包含 conda、pip、zlib、python 以及它们所需要的包）。
+【[git工具](https://git-scm.com/)】
 【[python 官网](https://www.python.org/downloads)】
 【[miniconda 官网](https://docs.anaconda.com/free/miniconda)】
 【[anaconda官网](https://www.anaconda.com/download)】

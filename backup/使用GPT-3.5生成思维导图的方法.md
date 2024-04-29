@@ -16,6 +16,6 @@ _这里我以学习 go 为一个简单的示例_
 
 # 步骤3:
 
-使用 Markmap 进行可视化，复制 Markdown 内容到 [markmap.js.org](markmap.js.org) 这个网站。
+使用 Markmap 进行可视化，复制 Markdown 内容到 https://markmap.js.org 这个网站。
 
 ![image](https://github.com/liuyang-f/liuyang-f.github.io/assets/43442770/b39e3879-3238-42d4-9303-3455925433e6)

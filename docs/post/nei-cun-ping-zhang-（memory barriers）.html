@@ -135,7 +135,7 @@ void read_data_cpu1(void) {
 <li>3、驱动程序</li>
 </ul>
 <h2>Linux 内核中实现的无锁队列</h2>
-<p>环形缓冲区 kfifo 使用了 Memory barrier</p>
+<p>环形缓冲区 kfifo（只有一个线程读，并且只有另一个线程写） 使用了 Memory barrier</p>
 <ul>
 <li>kfifo_init()</li>
 <li>kfifo_alloc()</li>

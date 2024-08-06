@@ -56,7 +56,7 @@
 
 
 ## Linux 内核中实现的无锁队列
-环形缓冲区 kfifo 使用了 Memory barrier
+环形缓冲区 kfifo（只有一个线程读，并且只有另一个线程写） 使用了 Memory barrier
   - kfifo_init()
   - kfifo_alloc()
   - kfifo_free()

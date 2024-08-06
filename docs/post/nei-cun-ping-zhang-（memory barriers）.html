@@ -133,6 +133,15 @@ void read_data_cpu1(void) {
 <li>1、实现同步原语</li>
 <li>2、实现无锁结构</li>
 <li>3、驱动程序</li>
+</ul>
+<h2>Linux 内核中实现的无锁队列</h2>
+<p>环形缓冲区 kfifo 使用了 Memory barrier</p>
+<ul>
+<li>kfifo_init()</li>
+<li>kfifo_alloc()</li>
+<li>kfifo_free()</li>
+<li>__kfifo_put()</li>
+<li>__kfifo_get()</li>
 </ul></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 

@@ -53,3 +53,12 @@
 - 1、实现同步原语
 - 2、实现无锁结构
 - 3、驱动程序
+
+
+## Linux 内核中实现的无锁队列
+环形缓冲区 kfifo 使用了 Memory barrier
+  - kfifo_init()
+  - kfifo_alloc()
+  - kfifo_free()
+  - __kfifo_put()
+  - __kfifo_get()

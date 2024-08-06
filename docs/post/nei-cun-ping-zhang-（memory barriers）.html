@@ -141,13 +141,24 @@ void read_data_cpu1(void) {
 </ul>
 <h2>Linux 内核中实现的无锁队列</h2>
 <p>环形缓冲区 kfifo（只有一个线程读，并且只有另一个线程写） 使用了 Memory barrier</p>
-<ul>
-<li>kfifo_init()</li>
-<li>kfifo_alloc()</li>
-<li>kfifo_free()</li>
-<li>__kfifo_put()</li>
-<li>__kfifo_get()</li>
-</ul></div>
+<pre class="notranslate"><code class="notranslate">__kfifo_alloc()
+__kfifo_free()
+__kfifo_init
+__kfifo_in //写入数据
+__kfifo_out // 读取数据
+</code></pre>
+<p>无锁化环形队里的简单理解：<br>
+1、有一个结构体，data用于存储数据，out和in作为读写的位置标识；<br>
+2、一个线程仅从结构中读取数据（out增加），另一个线程仅向结构中写入数据（in增加）；<br>
+3、当写入数据时，先把数据copy到data中，中间使用 smp_wmb，然后再增加in；这样另一个线程，检测到in改变时，更新data中的数据一定是完成的；<br>
+4、当读取数据时，先从data中copy数据，中间使用 smp_wmb，然后再增加out；这样另一个线程，检测到out改变时，获取data中的数据一定是完成的；<br>
+5、无论读写，都是先执行动作，然后改变标志变量，借用smp_wmb确保改变标志变量一定在执行动作的后面，另一个线程可以通过标志判断动作是否完成；</p>
+<p>头文件：<a href="https://elixir.bootlin.com/linux/v6.10.3/source/include/linux/kfifo.h" rel="nofollow">https://elixir.bootlin.com/linux/v6.10.3/source/include/linux/kfifo.h</a><br>
+源文件：<a href="https://elixir.bootlin.com/linux/v6.10.3/source/lib/kfifo.c" rel="nofollow">https://elixir.bootlin.com/linux/v6.10.3/source/lib/kfifo.c</a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/5528df09-56ec-4f87-a3cd-091ce0dcadac"><img src="https://github.com/user-attachments/assets/5528df09-56ec-4f87-a3cd-091ce0dcadac" alt="image" style="max-width: 100%;"></a><br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/59124275-c8eb-4402-91f3-b51c77043d89"><img src="https://github.com/user-attachments/assets/59124275-c8eb-4402-91f3-b51c77043d89" alt="image" style="max-width: 100%;"></a><br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/f441d8fb-c970-416c-a358-1821a2e5c946"><img src="https://github.com/user-attachments/assets/f441d8fb-c970-416c-a358-1821a2e5c946" alt="image" style="max-width: 100%;"></a><br>
+<a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/0f825f10-2eff-46d3-88c0-89431e9a6027"><img src="https://github.com/user-attachments/assets/0f825f10-2eff-46d3-88c0-89431e9a6027" alt="image" style="max-width: 100%;"></a></p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>

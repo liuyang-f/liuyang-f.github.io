@@ -59,8 +59,24 @@
 
 ## Linux 内核中实现的无锁队列
 环形缓冲区 kfifo（只有一个线程读，并且只有另一个线程写） 使用了 Memory barrier
-  - kfifo_init()
-  - kfifo_alloc()
-  - kfifo_free()
-  - __kfifo_put()
-  - __kfifo_get()
+```
+__kfifo_alloc()
+__kfifo_free()
+__kfifo_init
+__kfifo_in //写入数据
+__kfifo_out // 读取数据
+```
+无锁化环形队里的简单理解：
+1、有一个结构体，data用于存储数据，out和in作为读写的位置标识；
+2、一个线程仅从结构中读取数据（out增加），另一个线程仅向结构中写入数据（in增加）；
+3、当写入数据时，先把数据copy到data中，中间使用 smp_wmb，然后再增加in；这样另一个线程，检测到in改变时，更新data中的数据一定是完成的；
+4、当读取数据时，先从data中copy数据，中间使用 smp_wmb，然后再增加out；这样另一个线程，检测到out改变时，获取data中的数据一定是完成的；
+5、无论读写，都是先执行动作，然后改变标志变量，借用smp_wmb确保改变标志变量一定在执行动作的后面，另一个线程可以通过标志判断动作是否完成；
+
+头文件：https://elixir.bootlin.com/linux/v6.10.3/source/include/linux/kfifo.h
+源文件：https://elixir.bootlin.com/linux/v6.10.3/source/lib/kfifo.c
+
+![image](https://github.com/user-attachments/assets/5528df09-56ec-4f87-a3cd-091ce0dcadac)
+![image](https://github.com/user-attachments/assets/59124275-c8eb-4402-91f3-b51c77043d89)
+![image](https://github.com/user-attachments/assets/f441d8fb-c970-416c-a358-1821a2e5c946)
+![image](https://github.com/user-attachments/assets/0f825f10-2eff-46d3-88c0-89431e9a6027)

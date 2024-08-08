@@ -133,6 +133,31 @@ void read_data_cpu1(void) {
 </code></pre>
 </li>
 </ul>
+<h2>内存重新排序（Memory Reordering）</h2>
+<ul>
+<li>假如我们希望的语句顺序是，先执行语句A，在执行语句B；</li>
+<li>编译器的问题
+<ul>
+<li>由于编译器优化，导致生成的汇编代码，变成了先执行B，在执行A；</li>
+<li>使用编译器屏障，可以避免生成的汇编代码乱序的问题；</li>
+</ul>
+</li>
+<li>多处理器的问题
+<ul>
+<li>虽然解决了编译器带来的乱序问题，但实际运行时，还是会出现先执行B，在执行A的情况（可能和我们预测的不一样）；</li>
+<li>在多个处理器的场景，每个处理器会在保证结果一致性的前提下，在运行期间对语句的处理顺序进行优化；即只要不影响最终的运行结果，处理器可能先执行B，在执行A；</li>
+<li>特别是语句A和语句B没有关联的情况下，先执行A或者先执行B都不会影响最终的结果；</li>
+</ul>
+</li>
+<li>解决方案
+<ul>
+<li>同时编译器屏障和内存屏障，asm volatile 用于编译器屏障，mfence 用于内存屏障；</li>
+</ul>
+<pre class="notranslate"><code class="notranslate">asm volatile("" ::: "memory");        // Prevent compiler reordering
+asm volatile("mfence" ::: "memory");  // Prevent memory reordering
+</code></pre>
+</li>
+</ul>
 <h2>Memory barrier 常用场景</h2>
 <ul>
 <li>1、实现同步原语</li>

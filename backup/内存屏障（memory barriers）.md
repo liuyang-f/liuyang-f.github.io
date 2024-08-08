@@ -52,6 +52,7 @@
 	```
 
 ## 内存重新排序（Memory Reordering）
+推荐博客：https://preshing.com/20120515/memory-reordering-caught-in-the-act
 - 假如我们希望的语句顺序是，先执行语句A，在执行语句B；
 - 编译器的问题
   - 由于编译器优化，导致生成的汇编代码，变成了先执行B，在执行A；

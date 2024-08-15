@@ -1,5 +1,19 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Wed, 07 Aug 2024 07:23:19 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>锁、原子变量、CAS</title><link>https://liuyang-f.github.io/post/suo-%E3%80%81-yuan-zi-bian-liang-%E3%80%81CAS.html</link><description>## 互斥锁&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Thu, 15 Aug 2024 09:37:18 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>无锁化编程资料</title><link>https://liuyang-f.github.io/post/wu-suo-hua-bian-cheng-zi-liao.html</link><description>## 单个生产者、消费者无锁队列&#13;
+https://github.com/cameron314/readerwriterqueue&#13;
+&#13;
+## 多生产者、消费者无锁队列&#13;
+https://github.com/cameron314/concurrentqueue&#13;
+&#13;
+## 《C++ Concurrency in Action - SECOND EDITION》的中文翻译项目&#13;
+https://github.com/xiaoweiChen/CPP-Concurrency-In-Action-2ed-2019&#13;
+&#13;
+## 英文原版PDF《C++ Concurrency in Action - SECOND EDITION》&#13;
+[C++ Concurrency in Action-2ed.pdf](https://github.com/user-attachments/files/16623807/C%2B%2B.Concurrency.in.Action-2ed.pdf)&#13;
+&#13;
+## 中文翻译版PDF《C++ Concurrency in Action - SECOND EDITION》&#13;
+[C++-Concurrency-In-Action-2ed-zh-v0.2.pdf](https://github.com/user-attachments/files/16623811/C%2B%2B-Concurrency-In-Action-2ed-zh-v0.2.pdf)&#13;
+。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/wu-suo-hua-bian-cheng-zi-liao.html</guid><pubDate>Thu, 15 Aug 2024 09:36:53 +0000</pubDate></item><item><title>锁、原子变量、CAS</title><link>https://liuyang-f.github.io/post/suo-%E3%80%81-yuan-zi-bian-liang-%E3%80%81CAS.html</link><description>## 互斥锁&#13;
 - 底层：操作系统内核实现。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/suo-%E3%80%81-yuan-zi-bian-liang-%E3%80%81CAS.html</guid><pubDate>Wed, 07 Aug 2024 07:22:41 +0000</pubDate></item><item><title>内存屏障（memory barriers）</title><link>https://liuyang-f.github.io/post/nei-cun-ping-zhang-%EF%BC%88memory%20barriers%EF%BC%89.html</link><description># linux源码在线网站：https://elixir.bootlin.com/linux/latest/source&#13;
 &#13;
 ## 什么是内存屏障&#13;

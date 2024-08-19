@@ -85,21 +85,21 @@
 - 同一个线程中，同一个变量的操作，有明确的先后顺序；但是，在不同线程中没有确定的顺序；
   比如：`①x.store(true,std::memory_order_relaxed); ②y.load(std::memory_order_relaxed)`，如果①②在同一线程，y值一定是ture；如果①②在不同线程的两个线程中，y值不一定是ture；
 - 自由序的理解
-  - 1、假如有一个人叫张三，他有一份工作，守在电话旁，接到电话后，为其他人记录数字；没有人打电话给他的时候，他记录的值为0；
-  - 2、某一天，有个叫做A的人，打电话给张三让他记录10；接着有个叫做B的人，打电话给张三让他记录20；在接着有个叫做C的人，打电话给张三让他记录40；
-  - 3、张三先后接到3个电话，需要记录3的人的不同数字；他是这样做的，他整理的一张表，按照3人要求的顺序记录保存了一组数据为：0,10,20,40；
-  - 4、接着，有个叫D的人，打电话问张三他现在记录的值是多少？
-  - 5、由于张三记录的是一组数据，他需要从这组数据（0, 10, 20, 40）选择一个值告诉D；具体选择哪个值完全看张三自己的心情，可以是0，也可以是20，当然也可以是40；
-  - 6、如果张三告诉D的数字为0后；D觉得张三告诉自己的值不是最新的，所以再次询问张三此时值是多少？
-  - 7、此时，张三已经告诉过D一次数字为0，他可以选择再次告诉D数字为0，也可以选择其他任意值；张三决定第二次告诉D的数字为20；
-  - 8、D获取20数字后，还是觉得张三告诉他的数字不是最新的，于是就第三次问张三他现在保存的数值是多少？
-  - 9、张三有自己的规则，每次选择数字只会在上次告诉对方的数字和最新数字之间选择；他上次告诉D的数字为20，所以他不会选择0和10告诉张三，他可以选择20或者40告诉张三；
-  - 10、这次张三选择20告诉D，D觉得张三告诉自己的数字是最新的了（实际上不是最新的），也就不再找张三询问了；
-  - 11、随后，又有一个人叫E，他找张三询问最新的数值；张三知道E是第一次询问自己数值，所以会在再（0, 10, 20, 40）之间任意选择一个数值通知给E；同样的，以后E再多次找张三询问数字，张三也只会在上次通知给E的数字和最新数字之前选择一个数字通知给E；
-  - 12、E查询以后，又告诉张三写入2个数字123和888，张三保存的数字表变为（0, 10, 20, 40，123, 888）；
-  - 13、接着，A又多次询问张三保存的数值是多少？张三可以选择的数值顺序为（0, 10, 20, 40，123, 888）；
-  - 14、A一共询问了十次，张三给A的十次回复数字为：0,0,0,0,0,0,0,0,0,0；即每一次都是0，张三可以这样做；
-  - 15、B也询问了张三十次，张三给B的十次回复数字为：0,0,0,20,123,123,123,888,888,888；每一次的回复数字，都必须是在上一次数字和最新数字之间选择；
+  - （1）假如有一个人叫张三，他有一份工作，守在电话旁，接到电话后，为其他人记录数字；没有人打电话给他的时候，他记录的值为0；
+  - （2）某一天，有个叫做A的人，打电话给张三让他记录10；接着有个叫做B的人，打电话给张三让他记录20；在接着有个叫做C的人，打电话给张三让他记录40；
+  - （3）张三先后接到3个电话，需要记录3的人的不同数字；他是这样做的，他整理的一张表，按照3人要求的顺序记录保存了一组数据为：0,10,20,40；
+  - （4）接着，有个叫D的人，打电话问张三他现在记录的值是多少？
+  - （5）由于张三记录的是一组数据，他需要从这组数据（0, 10, 20, 40）选择一个值告诉D；具体选择哪个值完全看张三自己的心情，可以是0，也可以是20，当然也可以是40；
+  - （6）如果张三告诉D的数字为0后；D觉得张三告诉自己的值不是最新的，所以再次询问张三此时值是多少？
+  - （7）此时，张三已经告诉过D一次数字为0，他可以选择再次告诉D数字为0，也可以选择其他任意值；张三决定第二次告诉D的数字为20；
+  - （8）D获取20数字后，还是觉得张三告诉他的数字不是最新的，于是就第三次问张三他现在保存的数值是多少？
+  - （9）张三有自己的规则，每次选择数字只会在上次告诉对方的数字和最新数字之间选择；他上次告诉D的数字为20，所以他不会选择0和10告诉张三，他可以选择20或者40告诉张三；
+  - （10）这次张三选择20告诉D，D觉得张三告诉自己的数字是最新的了（实际上不是最新的），也就不再找张三询问了；
+  - （11）随后，又有一个人叫E，他找张三询问最新的数值；张三知道E是第一次询问自己数值，所以会在再（0, 10, 20, 40）之间任意选择一个数值通知给E；同样的，以后E再多次找张三询问数字，张三也只会在上次通知给E的数字和最新数字之前选择一个数字通知给E；
+  - （12）E查询以后，又告诉张三写入2个数字123和888，张三保存的数字表变为（0, 10, 20, 40，123, 888）；
+  - （13）接着，A又多次询问张三保存的数值是多少？张三可以选择的数值顺序为（0, 10, 20, 40，123, 888）；
+  - （14）A一共询问了十次，张三给A的十次回复数字为：0,0,0,0,0,0,0,0,0,0；即每一次都是0，张三可以这样做；
+  - （15）B也询问了张三十次，张三给B的十次回复数字为：0,0,0,20,123,123,123,888,888,888；每一次的回复数字，都必须是在上一次数字和最新数字之间选择；
 **_类比到程序中，张三其实是一个原子变量，A、B、C、D、E是5个不同的线程，即多线程对一个原子变量（设置了std::memory_order_relaxed）store、load的规则。_**
 - 例子一代码分析：
   - （1）语句5有可能触发，即z值有可能为0；
@@ -220,3 +220,158 @@
    print(values5);
   }
   ```
+
+## 获取-释放序
+- 自由序的加强版，没有统一顺序，引入同步概念；
+- load操作使用memory_order_acquire，store操作使用memory_order_release；
+- release和acquire类似一个屏障点，在release之前的语句不可能重排到release后面发生；acquire之后的语句不可能重排到acquire前面发生；
+- 一般在一个线程中使用release，另外一个线程中结合while功能使用acquire，确保release和acquire同步；
+- 获取-释放序的理解，在自由序的例子上增加一些规则：
+  - （1）假如，除了张三干这份工作，还有李四、王五；当然还可能有更多人干这份工作；
+  - （2）某天，有一个叫做A的人，想让张三记录数字10，按照之前的规则【自由序】，直接告诉记录数字即可；但是A现在告诉张三更多的信息，以便符合新的规则【获取-释放序】；
+  - （3）A会告诉张三诉”请记下数字10，它属于第1批次的操作（batch，类似一个版本号标记）“；接着，A又通知李四、王五记录数字，且李四记录的数字属于第1批次的最后一个操作；
+  - （4）A会告诉李四“请记下数字20，它属于第1批次的操作”；A会告诉王五“请记下数字30，它属于第1批次的操作，并且是第1批次的最后一次操作，来源于A的通知”【release】；
+  - （5）上述A告诉张三、李四、王五的操作，就是store-release模型；当下一次，A需要告诉张三、李四、王五记录值时，就需要更新批次号为“第2批次的操作”，依此类推，变化批次号；
+  - （6）同天，有一个叫做B的人，询问张三、李四、王五记录的数字，可以只询问数字【自由序】；也可以询问数字和关于批次的信息（是否为批次的最后一次操作，这就是load-acquire模型）【获取-释放序】；
+  - （7）B先询问张三数字，张三告诉B“值为10，它是一个普通值”；接着，又询问王五数字和关于批次的信息，王五告诉B“数字为30，它属于第1批次最后一次操作，来源于A的通知”【acquire模型】，至此B获取到了批次号；
+  - （8）最后，B又询问李四数字，由于B获知了批次号，他会这样询问“请告诉我数字，它属于第1批次，且来源于A的通知”；李四会把数字20告诉B，确保和获的数字30是同一批次的；
+  **_类比到程序中，A、B是两个不同的线程，张三、李四、王五是多个不同的原子变量；引入标记批次号，确保同一批次完整性：同一批次的最后一次操作执行release，然后对最后一次操作的变量执行acquire后获取批次号，使用批次号反查同一批次的其他操作数据值；_**
+- 例子一代码分析：
+  - （1）肯定会触发语句⑤，即z值肯定为1；
+  - （2）根据memory_order_release的限定，语句①肯定在语句②之前发生；
+  - （3）又根据memory_order_acquire的限定，语句④肯定在语句③之后发生；
+  - （4）语句②和语句③同步，所以语句①肯定在语句④之前发生；即z值为1，会触发语句⑤；
+  ```
+  #include <atomic>
+  #include <thread>
+  #include <assert.h>
+  std::atomic<bool> x,y;
+  std::atomic<int> z;
+  void write_x_then_y()
+  {
+   x.store(true,std::memory_order_relaxed); // 1 
+   y.store(true,std::memory_order_release); // 2
+  }
+  void read_y_then_x()
+  {
+   while(!y.load(std::memory_order_acquire)); // 3 自旋，等待y被设置为true
+   if(x.load(std::memory_order_relaxed)) // 4
+   ++z;
+  }
+  int main()
+  {
+   x=false;
+   y=false;
+   z=0;
+   std::thread a(write_x_then_y);
+   std::thread b(read_y_then_x);
+   a.join();
+   b.join();
+   assert(z.load()!=0); // 5
+  }
+  ```
+- 例子二代码分析，使用获取-释放序传递同步：
+  - （1）thread_3中的assert语句肯定不会触发；
+  - （1）根据release-acquire规则，语句①和语句②同步，语句③和语句④同步；再根据程序逻辑，语句②肯定在③之前发生，可知语句①肯定在④之前发生；
+  - （2）结果：语句①之前的语句，肯定比语句④之后的语句先发生；
+  - （3）同步，可以理解为同时发生，即语句①与语句②同时发生，语句③与语句④同时发生，把不同的线程执行顺序关联到一起，好比实现了同一线程的串行；
+  ```
+  std::atomic<int> data[5];
+  std::atomic<bool> sync1(false),sync2(false);
+  void thread_1()
+  {
+   data[0].store(42,std::memory_order_relaxed);
+   data[1].store(97,std::memory_order_relaxed);
+   data[2].store(17,std::memory_order_relaxed);
+   data[3].store(-141,std::memory_order_relaxed);
+   data[4].store(2003,std::memory_order_relaxed);
+   sync1.store(true,std::memory_order_release); // 1.设置sync1
+  }
+  void thread_2()
+  {
+   while(!sync1.load(std::memory_order_acquire)); // 2.直到sync1设置后，循环结
+  束
+   sync2.store(true,std::memory_order_release); // 3.设置sync2
+  }
+  void thread_3()
+  {
+   while(!sync2.load(std::memory_order_acquire)); // 4.直到sync1设置后，循环结
+  束
+   assert(data[0].load(std::memory_order_relaxed)==42);
+   assert(data[1].load(std::memory_order_relaxed)==97);
+   assert(data[2].load(std::memory_order_relaxed)==17);
+   assert(data[3].load(std::memory_order_relaxed)==-141);
+   assert(data[4].load(std::memory_order_relaxed)==2003);
+  }
+  ```
+  使用memory_order_acq_rel把sync1和sync2改写为一个变量sync：
+  ```
+  std::atomic<int> sync(0);
+  void thread_1()
+  {
+   // ...
+   sync.store(1,std::memory_order_release);
+  }
+  void thread_2()
+  {
+   int expected=1;
+   while(!sync.compare_exchange_strong(expected,2,
+   std::memory_order_acq_rel))
+   expected=1;
+  }
+  void thread_3()
+  {
+   while(sync.load(std::memory_order_acquire)<2);
+   // ...
+  }
+  ```
+- memory_order_consume的数据相关性
+  - 这个内存序非常特殊，即使在C++17中也不推荐使用；
+  - 简单来说，使用consume模式load数据时：当load后面的语句会使用load数据时，可以保证这些语句和release语句同步；当load后面的语句不依赖load数据时，不会保证这些语句和release语句同步；
+  - 可以使用 std::kill_dependecy() 显式打破依赖链， std::kill_dependency() 是一个简单的函数模板，会复制提供的参数给返回值；
+  ```
+  int global_data[]={ … };
+  std::atomic<int> index;
+  void f()
+  {
+   int i=index.load(std::memory_order_consume);
+   do_something_with(global_data[std::kill_dependency(i)]);
+  }
+  ```
+  - 例子代码分析
+    - （1）语句④、⑤肯定不会触发，语句⑥可能触发；
+	- （2）由于语句④、⑤依赖数据x，x依赖p.load，所以语句④、⑤会同步于语句②之后发生；即语句④、⑤肯定会在语句⑦、⑧之后发生；
+	- （3）由于语句⑥没有同步保证，所以可能在语句①之前发生，也可能在语句①之后发生；
+	```
+	struct X
+    {
+    int i;
+    std::string s;
+    };
+    std::atomic<X*> p;
+    std::atomic<int> a;
+    void create_x()
+    {
+     X* x=new X;
+     x->i=42; // 7
+     x->s="hello"; // 8
+     a.store(99,std::memory_order_relaxed); // 1
+     p.store(x,std::memory_order_release); // 2
+    }
+    void use_x()
+    {
+     X* x;
+     while(!(x=p.load(std::memory_order_consume))) // 3
+     std::this_thread::sleep(std::chrono::microseconds(1));
+     assert(x->i==42); // 4
+     assert(x->s=="hello"); // 5
+     assert(a.load(std::memory_order_relaxed)==99); // 6
+    }
+    int main()
+    {
+     std::thread t1(create_x);
+     std::thread t2(use_x);
+     t1.join();
+     t2.join();
+    }
+	```

@@ -496,6 +496,148 @@ int main()
 </li>
 </ul>
 </li>
+</ul>
+<h2>release-acquire的实际应用（无锁生产者、消费者队列）</h2>
+<ul>
+<li>思想：多线程操作（读、写）一段无锁保护的内存时，写线程往内存写入数据并且修改flag作为写完成的标记，然后读线程使用falg判断是否写完成，同时保证先写后读的顺序；</li>
+<li>存在问题：①flag需要多线程安全的（原子变量的原子性）；②需要保证无锁保护内存的先写后读的顺序（原子变量的内存序）；</li>
+<li>例子代码分析：
+<ul>
+<li>（1）生产者和消费者之间的同步【有先后顺序】；先考虑只有一个消费者的场景，把线程c暂时屏蔽，语句①和语句②同步；根据release和acquire的规则，release之前的语句肯定先于release语句发生，acquire之后的语句肯定在acquire之后发生，所以消费者读取内存queue_data时，生产者肯定已经往内存queue_data写入数据完成，不会产生竞态；</li>
+<li>（2）消费者和消费者之间的同步【无先后顺序】；恢复线程c暂的屏蔽，存在两个消费者，此生产者写入数据仍然在2个消费者读取数据之前发生；虽然两个消费者可能同时执行语句④，但是语句②是读-改-写的原子操作，两个线程执行语句②获取的值肯定不一样，两个线程同时执行到语句④时item_index值肯定也不一样，即使同时访问queue_data，也是访问queue_data不同位置的数据，两个消费者线程也就不会产生竞态；推广到多个消费者线程也是如此；</li>
+<li>（3）生产者与多个消费者之间有明确的先后顺序，多个消费者之间没有先后顺序，即使多个消费者同时执行语句④也不会产生竞态；</li>
+</ul>
+<pre class="notranslate"><code class="notranslate">#include &lt;atomic&gt;
+#include &lt;thread&gt;
+std::vector&lt;int&gt; queue_data;
+std::atomic&lt;int&gt; count;
+void populate_queue()
+{
+ unsigned const number_of_items=20;
+ queue_data.clear();
+ for(unsigned i=0;i&lt;number_of_items;++i)
+ {
+ queue_data.push_back(i);
+ }
+ count.store(number_of_items,std::memory_order_release); // 1 初始化存储
+}
+void consume_queue_items()
+{
+ while(true)
+ {
+ int item_index;
+ if((item_index=count.fetch_sub(1,std::memory_order_acquire))&lt;=0) // 2
+一个“读-改-写”操作
+ {
+ wait_for_more_items(); // 3 等待更多元素
+ continue;
+ }
+ process(queue_data[item_index-1]); // 4 安全读取queue_data
+ }
+}
+int main()
+{
+ std::thread a(populate_queue);
+ std::thread b(consume_queue_items);
+ std::thread c(consume_queue_items);
+ a.join();
+ b.join();
+ c.join();
+}
+</code></pre>
+</li>
+</ul>
+<h2>栅栏 Fences（也称内存屏障，memory barriers）</h2>
+<ul>
+<li>多线程中为了提升性能的编译器和处理器优化会导致内存操作顺序重排，出现不符合预期的行为，使用fences可以控制某些语句的顺序；</li>
+<li>fences语句类似一堵墙，fences前的语句不能跑到fences后面【release模式】，fences后面的语句不能跑到fences前面【acquire模式】；</li>
+<li>使用std::atomic_thread_fence【避免处理器重排】、std::atomic_signal_fence【避免编译器重排】通过设置内存序std::memory_order_release使用；</li>
+<li>std::atomic_thread_fence可以和原子变量的load/store结合使用，需要release-acquire成对使用；</li>
+<li>例子代码分析：
+<ul>
+<li>（1）语句⑦肯定不会触发，即z值为1；</li>
+<li>（2）</li>
+</ul>
+<pre class="notranslate"><code class="notranslate">#include &lt;atomic&gt;
+#include &lt;thread&gt;
+#include &lt;assert.h&gt;
+std::atomic&lt;bool&gt; x,y;
+std::atomic&lt;int&gt; z;
+void write_x_then_y()
+{
+ x.store(true,std::memory_order_relaxed); // 1
+ std::atomic_thread_fence(std::memory_order_release); // 2
+ y.store(true,std::memory_order_relaxed); // 3
+}
+void read_y_then_x()
+{
+ while(!y.load(std::memory_order_relaxed)); // 4
+ std::atomic_thread_fence(std::memory_order_acquire); // 5
+ if(x.load(std::memory_order_relaxed)) // 6
+ ++z;
+}
+int main()
+{
+ x=false;
+ y=false;
+ z=0;
+ std::thread a(write_x_then_y);
+ std::thread b(read_y_then_x);
+ a.join();
+ b.join();
+ assert(z.load()!=0); // 7
+}
+</code></pre>
+如果把write_x_then_y改写后，无法确定上面例子的assert语句是否会触发；
+<pre class="notranslate"><code class="notranslate">void write_x_then_y()
+{
+ std::atomic_thread_fence(std::memory_order_release);
+ x.store(true,std::memory_order_relaxed);
+ y.store(true,std::memory_order_relaxed);
+}
+</code></pre>
+</li>
+</ul>
+<h2>栅栏（Fences）可以影响非原子操作排序</h2>
+<ul>
+<li>把上面栅栏例子中的原子变量x，改为非原子变量，依然可以达到同步的目的；</li>
+<li>例子代码分析：
+<ul>
+<li>（1）x虽然为非原子变量，但是仍然会受到atomic_thread_fence的限制，有确定的先后顺序，不会出现竞态；</li>
+<li>（2）语句①在语句②之前发生，语句④在语句③之后发生，语句②、③同步，语句①在语句④之前发生，不会同时读、写x；</li>
+</ul>
+<pre class="notranslate"><code class="notranslate">#include &lt;atomic&gt;
+#include &lt;thread&gt;
+#include &lt;assert.h&gt;
+bool x=false; // x现在是一个非原子变量
+std::atomic&lt;bool&gt; y;
+std::atomic&lt;int&gt; z;
+void write_x_then_y()
+{
+ x=true; // 1 在栅栏前存储x
+ std::atomic_thread_fence(std::memory_order_release);
+ y.store(true,std::memory_order_relaxed); // 2 在栅栏后存储y
+}
+void read_y_then_x()
+{
+ while(!y.load(std::memory_order_relaxed)); // 3 在#2写入前，持续等待
+ std::atomic_thread_fence(std::memory_order_acquire);
+ if(x) // 4 这里读取到的值，是#1中写入
+ ++z;
+}
+int main()
+{
+ x=false;
+ y=false;
+ z=0;
+ std::thread a(write_x_then_y);
+ std::thread b(read_y_then_x);
+ a.join();
+ b.join();
+ assert(z.load()!=0); // 5 断言将不会触发
+}
+</code></pre>
+</li>
 </ul></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 

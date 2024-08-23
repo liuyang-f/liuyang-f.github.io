@@ -1,0 +1,529 @@
+<!DOCTYPE html>
+<html data-color-mode="light" data-dark-theme="dark_colorblind" data-light-theme="light" lang="zh-CN">
+<head>
+    <meta content="text/html; charset=utf-8" http-equiv="content-type" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <link href='https://mirrors.sustech.edu.cn/cdnjs/ajax/libs/Primer/21.0.7/primer.css' rel='stylesheet' />
+    
+    <link rel="icon" href="https://github.githubassets.com/favicons/favicon.svg"><script>
+        let theme = localStorage.getItem("meek_theme") || "light";
+        document.documentElement.setAttribute("data-color-mode", theme);
+    </script>
+<meta name="description" content="- 什么是风险指针
+  这是解决在多线程中，如何安全释放内存的一种方法。">
+<meta property="og:title" content="## 风险指针（hazard pointers）">
+<meta property="og:description" content="- 什么是风险指针
+  这是解决在多线程中，如何安全释放内存的一种方法。">
+<meta property="og:type" content="article">
+<meta property="og:url" content="https://liuyang-f.github.io/post/%23%23%20-feng-xian-zhi-zhen-%EF%BC%88hazard%20pointers%EF%BC%89.html">
+<meta property="og:image" content="https://github.githubassets.com/favicons/favicon.svg">
+<title>## 风险指针（hazard pointers）</title>
+
+
+
+</head>
+<style>
+body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;padding: 45px;font-size: 16px;font-family: sans-serif;line-height: 1.25;}
+#header{display:flex;padding-bottom:8px;border-bottom: 1px solid var(--borderColor-muted, var(--color-border-muted));margin-bottom: 16px;}
+#footer {margin-top:64px; text-align: center;font-size: small;}
+
+</style>
+
+<style>
+.postTitle{margin: auto 0;font-size:40px;font-weight:bold;}
+.title-right{display:flex;margin:auto 0 0 auto;}
+.title-right .circle{padding: 14px 16px;margin-right:8px;}
+#postBody{border-bottom: 1px solid var(--color-border-default);padding-bottom:36px;}
+#postBody hr{height:2px;}
+#cmButton{height:48px;margin-top:48px;}
+#comments{margin-top:64px;}
+.g-emoji{font-size:24px;}
+@media (max-width: 600px) {
+    body {padding: 8px;}
+    .postTitle{font-size:24px;}
+}
+.copy-feedback {
+    display: none;
+    position: absolute;
+    top: 10px;
+    right: 50px;
+    color: var(--color-fg-on-emphasis);
+    background-color: var(--color-fg-muted);
+    border-radius: 3px;
+    padding: 5px 8px;
+    font-size: 12px;
+}
+</style>
+<style>#postBody{font-size:20px;font-family:KaiTi_GB2312}</style>
+
+
+
+<body>
+    <div id="header">
+<h1 class="postTitle">## 风险指针（hazard pointers）</h1>
+<div class="title-right">
+    <a href="https://liuyang-f.github.io" id="buttonHome" class="btn btn-invisible circle" title="首页">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathHome" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+    <a href="https://github.com/liuyang-f/liuyang-f.github.io/issues/18" target="_blank" class="btn btn-invisible circle" title="Issue">
+        <svg class="octicon" width="16" height="16">
+            <path id="pathIssue" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+    
+
+    <a class="btn btn-invisible circle" onclick="modeSwitch();" title="切换主题">
+        <svg class="octicon" width="16" height="16" >
+            <path id="themeSwitch" fill-rule="evenodd"></path>
+        </svg>
+    </a>
+
+</div>
+</div>
+    <div id="content">
+<div class="markdown-body" id="postBody"><ul>
+<li>
+<p>什么是风险指针<br>
+这是解决在多线程中，如何安全释放内存的一种方法。思想：</p>
+<ul>
+<li>当需要使用某个指针的时候，把该指针标记为风险指针；当不需要使用时，清除该风险指针；</li>
+<li>释放指针之前判断该指针是否为风险指针，如果不是，释放指针；如果是，添加到回收列表；</li>
+<li>周期检查回收列表，清除表中的非风险指针（表中的风险指针随时会变为非风险指针），安全回收内存；</li>
+</ul>
+</li>
+<li>
+<p>风险指针的使用</p>
+<ul>
+<li>关联函数
+<ul>
+<li>get_hazard_pointer_for_current_thread()<br>
+生成一个对象用于标记风险指针，当一个指针被放入该对象，这个指针就被标记为风险指针。</li>
+<li>outstanding_hazard_pointers_for()<br>
+判断一个指针是否为风险指针。</li>
+<li>reclaim_later()<br>
+把风险指针放入回收队列中。</li>
+<li>delete_nodes_with_no_hazards()<br>
+清除掉回收队列中的非风险指针。</li>
+</ul>
+</li>
+<li>代码分析：
+<ul>
+<li>（1）这段程序功能，是把head链表中头部的一个node数据从表中删掉，然后返回该node数据；</li>
+<li>（2）语句②以前功能，head修改为原head后面的node；由于使用compare_exchange_strong更新head的时候，需要读取原head数据，故把原head标记为风险指针，并在结束后清除风险指针【语句②】；</li>
+<li>（3）把old_head存储的数据给到res，然后返回res；使用res.swap语句，是因为old_head不需要使用data，直接转移所有权给到res；old_head本身是使用new创建的内存，需要解决delete的问题；</li>
+<li>（4）判断old_head是否有标记为风险指针【语句③】，如果不是风险指针，直接delete即可；如果是风险指针，添加至回收列表，随后在某个时刻变为非风险指针后再执行删除；</li>
+</ul>
+</li>
+</ul>
+<pre class="notranslate"><code class="notranslate">struct node
+{
+  std::shared_ptr&lt;T&gt; data;
+  node* next;
+
+  node(T const&amp; data_):
+    data(std::make_shared&lt;T&gt;(data_))
+  {}
+};
+std::atomic&lt;node*&gt; head;
+
+std::shared_ptr&lt;T&gt; pop()
+{
+  std::atomic&lt;void*&gt;&amp; hp=get_hazard_pointer_for_current_thread();
+  node* old_head=head.load();
+  do
+  {
+    node* temp;
+    do  // 1 直到将风险指针设为head指针
+    {
+      temp=old_head;
+      hp.store(old_head);
+      old_head=head.load();
+    } while(old_head!=temp);
+  }
+  while(old_head &amp;&amp;
+    !head.compare_exchange_strong(old_head,old_head-&gt;next));
+  hp.store(nullptr);  // 2 当声明完成，清除风险指针
+  std::shared_ptr&lt;T&gt; res;
+  if(old_head)
+  {
+    res.swap(old_head-&gt;data);
+    if(outstanding_hazard_pointers_for(old_head))  // 3 在删除之前对风险指针引用的节点进行检查
+    {
+      reclaim_later(old_head);  // 4
+    }
+    else
+    {
+      delete old_head;  // 5
+    }
+    delete_nodes_with_no_hazards();  // 6
+  }
+  return res;
+}
+</code></pre>
+</li>
+<li>
+<p>风险指针的实现</p>
+<ul>
+<li>关键结构：get_hazard_pointer_for_current_thread()</li>
+<li>代码分析：
+<ul>
+<li>（1）结构hazard_pointer存放线程id和风险指针，因为多线程操作所以都使用了原子变量；</li>
+<li>（2）数组hazard_pointers，预分配一段空间，风险指针就存在这块内存区域；</li>
+<li>（3）构造函数hp_owner，从hazard_pointers中取出一个未使用的空间，标记为本线程使用，然后使用get_pointer()返回引用把pointer暴露出去，用于在外部存储风险指针；</li>
+<li>（4）析构函数，把从hazard_pointers中取出的一个空间用完后，设置为未使用状态，id标记为默认值，pointer标记为nullptr，类似用完还给hazard_pointers；</li>
+<li>（5）语句⑤处，使用compare_exchange_strong把判断和赋值合为一个原子操作，即只有id为默认值说明该空间未使用，然后标记id本线程id，暴露pointer后续存放风险指针；</li>
+</ul>
+</li>
+</ul>
+<pre class="notranslate"><code class="notranslate">unsigned const max_hazard_pointers=100;
+struct hazard_pointer
+{
+  std::atomic&lt;std::thread::id&gt; id;
+  std::atomic&lt;void*&gt; pointer;
+};
+hazard_pointer hazard_pointers[max_hazard_pointers];
+
+class hp_owner
+{
+  hazard_pointer* hp;
+
+public:
+  hp_owner(hp_owner const&amp;)=delete;
+  hp_owner operator=(hp_owner const&amp;)=delete;
+  hp_owner():
+    hp(nullptr)
+  {
+    for(unsigned i=0;i&lt;max_hazard_pointers;++i)
+    {
+      std::thread::id old_id;
+      if(hazard_pointers[i].id.compare_exchange_strong(  // 6 尝试声明风险指针的所有权
+         old_id,std::this_thread::get_id()))
+      {
+        hp=&amp;hazard_pointers[i];
+        break;  // 7
+      }
+    }
+    if(!hp)  // 1
+    {
+      throw std::runtime_error("No hazard pointers available");
+    }
+  }
+
+  std::atomic&lt;void*&gt;&amp; get_pointer()
+  {
+    return hp-&gt;pointer;
+  }
+
+  ~hp_owner()  // 2
+  {
+    hp-&gt;pointer.store(nullptr);  // 8
+    hp-&gt;id.store(std::thread::id());  // 9
+  }
+};
+
+std::atomic&lt;void*&gt;&amp; get_hazard_pointer_for_current_thread()  // 3
+{
+  thread_local static hp_owner hazard;  // 4 每个线程都有自己的风险指针
+  return hazard.get_pointer();  // 5
+}
+</code></pre>
+<ul>
+<li>判断是否为风险指针：outstanding_hazard_pointers_for()</li>
+<li>只需要该指针在hazard_pointers风险队列中存放，即可判定该指针为风险指针；</li>
+</ul>
+<pre class="notranslate"><code class="notranslate">bool outstanding_hazard_pointers_for(void* p)
+{
+  for(unsigned i=0;i&lt;max_hazard_pointers;++i)
+  {
+    if(hazard_pointers[i].pointer.load()==p)
+    {
+      return true;
+    }
+  }
+  return false;
+}
+</code></pre>
+<ul>
+<li>把风险指针放入回收队列：data_to_reclaim()，add_to_reclaim_list()
+<ul>
+<li>引入一个新的类型data_to_reclaim管理风险指针，并用new创建对象；</li>
+<li>add_to_reclaim_list()中代码很简洁，使用compare_exchange_weak是因为nodes_to_reclaim多线程中随时可能变化，需要保证node-&gt;next指向旧的nodes_to_reclaim，才能把nodes_to_reclaim更新为node；</li>
+</ul>
+</li>
+<li>清空回收队列中的非风险指针：delete_nodes_with_no_hazards()
+<ul>
+<li>语句⑥，使用exchange获取回收队列，同时把nodes_to_reclaim置为nullptr，表明即将进行回收工作；</li>
+<li>遍历取出的回收队列，再次使用outstanding_hazard_pointers_for判断每个元素是否为风险指针，如果是风险指针，再次放入回收队列中；如果不是风险指针直接delete队列元素；</li>
+<li>delete队列元素，实际上是执行data_to_reclaim的析构函数，最终使用删除器删除data_to_reclaim中保存的指针data；</li>
+</ul>
+</li>
+<li>结构data_to_reclaim，用于管理风险指针：
+<ul>
+<li>data，存放风险指针；</li>
+<li>deleter，函数对象，执行删除风险指针的任务；</li>
+<li>next，回收队列连接指针；</li>
+<li>引入模板参数T，是因为删除风险指针需要明确指针类型，即函数do_delete()中的内容；</li>
+<li>构造函数，给deleter一个默认的删除函数；</li>
+<li>析构函数，使用删除函数deleter；</li>
+</ul>
+</li>
+<li>原子变量nodes_to_reclaim，回收队列的头部指针；回收队列元素都是data_to_reclaim结构，使用nodes_to_reclaim和data_to_reclaim::next可以遍历完整的回收队列；</li>
+</ul>
+<pre class="notranslate"><code class="notranslate">template&lt;typename T&gt;
+void do_delete(void* p)
+{
+  delete static_cast&lt;T*&gt;(p);
+}
+
+struct data_to_reclaim
+{
+  void* data;
+  std::function&lt;void(void*)&gt; deleter;
+  data_to_reclaim* next;
+
+  template&lt;typename T&gt;
+  data_to_reclaim(T* p):  // 1
+    data(p),
+    deleter(&amp;do_delete&lt;T&gt;),
+    next(0)
+  {}
+
+  ~data_to_reclaim()
+  {
+    deleter(data);  // 2
+  }
+};
+
+std::atomic&lt;data_to_reclaim*&gt; nodes_to_reclaim;
+
+void add_to_reclaim_list(data_to_reclaim* node)  // 3
+{
+  node-&gt;next=nodes_to_reclaim.load();
+  while(!nodes_to_reclaim.compare_exchange_weak(node-&gt;next,node));
+}
+
+template&lt;typename T&gt;
+void reclaim_later(T* data)  // 4
+{
+  add_to_reclaim_list(new data_to_reclaim(data));  // 5
+}
+
+void delete_nodes_with_no_hazards()
+{
+  data_to_reclaim* current=nodes_to_reclaim.exchange(nullptr);  // 6
+  while(current)
+  {
+    data_to_reclaim* const next=current-&gt;next;
+    if(!outstanding_hazard_pointers_for(current-&gt;data))  // 7
+    {
+      delete current;  // 8
+    }
+    else
+    {
+      add_to_reclaim_list(current);  // 9
+    }
+    current=next;
+  }
+}
+</code></pre>
+</li>
+<li>
+<p>风险指针的问题</p>
+<ul>
+<li>问题
+<ul>
+<li>每一次检查风险指针【outstanding_hazard_pointers_for】，都需要扫描max_hazard_pointers个原子变量，原子变量比较耗时。</li>
+<li>pop需要检查风险指针，不仅需要遍历完整的回收队列，还需要遍历风险指针队列，每次pop都需要遍历两个队列并访问原子变量，这成为一个性能瓶颈。</li>
+</ul>
+</li>
+<li>方案
+<ul>
+<li>考虑不需要每次pop都去清空回收队列，可以用一个原子变量记录回收队列的总数，当总数超过n×max_hazard_pointers后，pop执行清空回收队列的动作。<br>
+存在问题
+<ul>
+<li>多个线程访问同一个回收队列，存在竞争关系。</li>
+<li>回收队列的总数，是个原子变量，产生新的多线程访问原子变量的场景。</li>
+</ul>
+</li>
+<li>另一个思路，每个线程维护一个回收队列，所有线程的回收队列总数不会超过max_hazard_pointers*×max_hazard_pointers个。
+<ul>
+<li>回收队列作为线程内数据，不存在多线程竞争。</li>
+<li>每次pop，各个线程检查自己的回收队列，进行清空。</li>
+<li>如果线程退出时，自己还存在回收队列，通过全局变量，把自己的回收队列，添加到其他的线程回收队列中，由其他线程清空回收队列。</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul></div>
+<div style="font-size:small;margin-top:8px;float:right;"></div>
+
+<button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>
+<div class="comments" id="comments"></div>
+
+</div>
+    <div id="footer"><div id="footer1">Copyright © <span id="copyrightYear"></span> <a href="https://liuyang-f.github.io">千金散尽还复来</a></div>
+<div id="footer2">
+    <span id="runday"></span><span>Powered by <a href="https://meekdai.com/Gmeek.html" target="_blank">Gmeek</a></span>
+</div>
+
+<script>
+var now=new Date();
+document.getElementById("copyrightYear").innerHTML=now.getFullYear();
+
+if("03/27/2024"!=""){
+    var startSite=new Date("03/27/2024");
+    var diff=now.getTime()-startSite.getTime();
+    var diffDay=Math.floor(diff/(1000*60*60*24));
+    document.getElementById("runday").innerHTML="网站运行"+diffDay+"天"+" • ";
+}
+</script></div>
+</body>
+<script>
+var IconList={'sun': 'M8 10.5a2.5 2.5 0 100-5 2.5 2.5 0 000 5zM8 12a4 4 0 100-8 4 4 0 000 8zM8 0a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0V.75A.75.75 0 018 0zm0 13a.75.75 0 01.75.75v1.5a.75.75 0 01-1.5 0v-1.5A.75.75 0 018 13zM2.343 2.343a.75.75 0 011.061 0l1.06 1.061a.75.75 0 01-1.06 1.06l-1.06-1.06a.75.75 0 010-1.06zm9.193 9.193a.75.75 0 011.06 0l1.061 1.06a.75.75 0 01-1.06 1.061l-1.061-1.06a.75.75 0 010-1.061zM16 8a.75.75 0 01-.75.75h-1.5a.75.75 0 010-1.5h1.5A.75.75 0 0116 8zM3 8a.75.75 0 01-.75.75H.75a.75.75 0 010-1.5h1.5A.75.75 0 013 8zm10.657-5.657a.75.75 0 010 1.061l-1.061 1.06a.75.75 0 11-1.06-1.06l1.06-1.06a.75.75 0 011.06 0zm-9.193 9.193a.75.75 0 010 1.06l-1.06 1.061a.75.75 0 11-1.061-1.06l1.06-1.061a.75.75 0 011.061 0z', 'moon': 'M9.598 1.591a.75.75 0 01.785-.175 7 7 0 11-8.967 8.967.75.75 0 01.961-.96 5.5 5.5 0 007.046-7.046.75.75 0 01.175-.786zm1.616 1.945a7 7 0 01-7.678 7.678 5.5 5.5 0 107.678-7.678z', 'sync': 'M1.705 8.005a.75.75 0 0 1 .834.656 5.5 5.5 0 0 0 9.592 2.97l-1.204-1.204a.25.25 0 0 1 .177-.427h3.646a.25.25 0 0 1 .25.25v3.646a.25.25 0 0 1-.427.177l-1.38-1.38A7.002 7.002 0 0 1 1.05 8.84a.75.75 0 0 1 .656-.834ZM8 2.5a5.487 5.487 0 0 0-4.131 1.869l1.204 1.204A.25.25 0 0 1 4.896 6H1.25A.25.25 0 0 1 1 5.75V2.104a.25.25 0 0 1 .427-.177l1.38 1.38A7.002 7.002 0 0 1 14.95 7.16a.75.75 0 0 1-1.49.178A5.5 5.5 0 0 0 8 2.5Z', 'home': 'M6.906.664a1.749 1.749 0 0 1 2.187 0l5.25 4.2c.415.332.657.835.657 1.367v7.019A1.75 1.75 0 0 1 13.25 15h-3.5a.75.75 0 0 1-.75-.75V9H7v5.25a.75.75 0 0 1-.75.75h-3.5A1.75 1.75 0 0 1 1 13.25V6.23c0-.531.242-1.034.657-1.366l5.25-4.2Zm1.25 1.171a.25.25 0 0 0-.312 0l-5.25 4.2a.25.25 0 0 0-.094.196v7.019c0 .138.112.25.25.25H5.5V8.25a.75.75 0 0 1 .75-.75h3.5a.75.75 0 0 1 .75.75v5.25h2.75a.25.25 0 0 0 .25-.25V6.23a.25.25 0 0 0-.094-.195Z', 'github': 'M8 0c4.42 0 8 3.58 8 8a8.013 8.013 0 0 1-5.45 7.59c-.4.08-.55-.17-.55-.38 0-.27.01-1.13.01-2.2 0-.75-.25-1.23-.54-1.48 1.78-.2 3.65-.88 3.65-3.95 0-.88-.31-1.59-.82-2.15.08-.2.36-1.02-.08-2.12 0 0-.67-.22-2.2.82-.64-.18-1.32-.27-2-.27-.68 0-1.36.09-2 .27-1.53-1.03-2.2-.82-2.2-.82-.44 1.1-.16 1.92-.08 2.12-.51.56-.82 1.28-.82 2.15 0 3.06 1.86 3.75 3.64 3.95-.23.2-.44.55-.51 1.07-.46.21-1.61.55-2.33-.66-.15-.24-.6-.83-1.23-.82-.67.01-.27.38.01.53.34.19.73.9.82 1.13.16.45.68 1.31 2.69.94 0 .67.01 1.3.01 1.49 0 .21-.15.45-.55.38A7.995 7.995 0 0 1 0 8c0-4.42 3.58-8 8-8Z', 'copy': 'M0 6.75C0 5.784.784 5 1.75 5h1.5a.75.75 0 0 1 0 1.5h-1.5a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-1.5a.75.75 0 0 1 1.5 0v1.5A1.75 1.75 0 0 1 9.25 16h-7.5A1.75 1.75 0 0 1 0 14.25Z M5 1.75C5 .784 5.784 0 6.75 0h7.5C15.216 0 16 .784 16 1.75v7.5A1.75 1.75 0 0 1 14.25 11h-7.5A1.75 1.75 0 0 1 5 9.25Zm1.75-.25a.25.25 0 0 0-.25.25v7.5c0 .138.112.25.25.25h7.5a.25.25 0 0 0 .25-.25v-7.5a.25.25 0 0 0-.25-.25Z', 'check': 'M13.78 4.22a.75.75 0 0 1 0 1.06l-7.25 7.25a.75.75 0 0 1-1.06 0L2.22 9.28a.751.751 0 0 1 .018-1.042.751.751 0 0 1 1.042-.018L6 10.94l6.72-6.72a.75.75 0 0 1 1.06 0Z'};
+var utterancesLoad=0;
+
+let themeSettings={
+    "dark": ["dark","moon","#00f0ff","dark-blue"],
+    "light": ["light","sun","#ff5000","github-light"],
+    "auto": ["auto","sync","","preferred-color-scheme"]
+};
+function changeTheme(mode, icon, color, utheme){
+    document.documentElement.setAttribute("data-color-mode",mode);
+    document.getElementById("themeSwitch").setAttribute("d",value=IconList[icon]);
+    document.getElementById("themeSwitch").parentNode.style.color=color;
+    if(utterancesLoad==1){utterancesTheme(utheme);}
+}
+function modeSwitch(){
+    let currentMode=document.documentElement.getAttribute('data-color-mode');
+    let newMode = currentMode === "light" ? "dark" : currentMode === "dark" ? "auto" : "light";
+    localStorage.setItem("meek_theme", newMode);
+    if(themeSettings[newMode]){
+        changeTheme(...themeSettings[newMode]);
+    }
+}
+function utterancesTheme(theme){
+    const message={type:'set-theme',theme: theme};
+    const iframe=document.getElementsByClassName('utterances-frame')[0];
+    iframe.contentWindow.postMessage(message,'https://utteranc.es');
+}
+if(themeSettings[theme]){changeTheme(...themeSettings[theme]);}
+console.log("\n %c Gmeek last https://github.com/Meekdai/Gmeek \n","padding:5px 0;background:#02d81d;color:#fff");
+</script>
+
+<script>
+document.getElementById("pathHome").setAttribute("d",IconList["home"]);
+document.getElementById("pathIssue").setAttribute("d",IconList["github"]);
+
+
+
+function openComments(){
+    cm=document.getElementById("comments");
+    cmButton=document.getElementById("cmButton");
+    cmButton.innerHTML="loading";
+    span=document.createElement("span");
+    span.setAttribute("class","AnimatedEllipsis");
+    cmButton.appendChild(span);
+
+    script=document.createElement("script");
+    script.setAttribute("src","https://utteranc.es/client.js");
+    script.setAttribute("repo","liuyang-f/liuyang-f.github.io");
+    script.setAttribute("issue-term","title");
+    
+    if(localStorage.getItem("meek_theme")=="dark"){script.setAttribute("theme","dark-blue");}
+    else if(localStorage.getItem("meek_theme")=="light") {script.setAttribute("theme","github-light");}
+    else{script.setAttribute("theme","preferred-color-scheme");}
+    
+    script.setAttribute("crossorigin","anonymous");
+    script.setAttribute("async","");
+    cm.appendChild(script);
+
+    int=self.setInterval("iFrameLoading()",200);
+}
+
+function iFrameLoading(){
+    var utterances=document.getElementsByClassName('utterances');
+    if(utterances.length==1){
+        if(utterances[0].style.height!=""){
+            utterancesLoad=1;
+            int=window.clearInterval(int);
+            document.getElementById("cmButton").style.display="none";
+            console.log("utterances Load OK");
+        }
+    }
+}
+
+document.addEventListener('DOMContentLoaded', () => {
+    const createClipboardHTML = (codeContent, additionalClasses = '') => `
+        <pre class="notranslate"><code class="notranslate">${codeContent}</code></pre>
+        <div class="clipboard-container position-absolute right-0 top-0 ${additionalClasses}">
+            <clipboard-copy class="ClipboardButton btn m-2 p-0" role="button" style="display: inherit;">
+                <svg height="16" width="16" class="octicon octicon-copy m-2"><path d="${IconList["copy"]}"></path></svg>
+                <svg height="16" width="16" class="octicon octicon-check color-fg-success m-2 d-none"><path d="${IconList["check"]}"></path></svg>
+            </clipboard-copy>
+            <div class="copy-feedback">Copied!</div>
+        </div>
+    `;
+
+    const handleCodeElements = (selector = '') => {
+        document.querySelectorAll(selector).forEach(codeElement => {
+            const codeContent = codeElement.innerHTML;
+            const newStructure = document.createElement('div');
+            newStructure.className = 'snippet-clipboard-content position-relative overflow-auto';
+            newStructure.innerHTML = createClipboardHTML(codeContent);
+
+            const parentElement = codeElement.parentElement;
+            if (selector.includes('highlight')) {
+                parentElement.insertBefore(newStructure, codeElement.nextSibling);
+                parentElement.removeChild(codeElement);
+            } else {
+                parentElement.parentElement.replaceChild(newStructure, parentElement);
+            }
+        });
+    };
+
+    handleCodeElements('pre.notranslate > code.notranslate');
+    handleCodeElements('div.highlight > pre.notranslate');
+
+    let currentFeedback = null;
+    document.querySelectorAll('clipboard-copy').forEach(copyButton => {
+        copyButton.addEventListener('click', () => {
+            const codeContent = copyButton.closest('.snippet-clipboard-content').innerText;
+            const tempTextArea = document.createElement('textarea');
+            tempTextArea.value = codeContent;
+            document.body.appendChild(tempTextArea);
+            tempTextArea.select();
+            document.execCommand('copy');
+            document.body.removeChild(tempTextArea);
+
+            const copyIcon = copyButton.querySelector('.octicon-copy');
+            const checkIcon = copyButton.querySelector('.octicon-check');
+            const copyFeedback = copyButton.nextElementSibling;
+
+            if (currentFeedback && currentFeedback !== copyFeedback) {currentFeedback.style.display = 'none';}
+            currentFeedback = copyFeedback;
+
+            copyIcon.classList.add('d-none');
+            checkIcon.classList.remove('d-none');
+            copyFeedback.style.display = 'block';
+            copyButton.style.borderColor = 'var(--color-success-fg)';
+
+            setTimeout(() => {
+                copyIcon.classList.remove('d-none');
+                checkIcon.classList.add('d-none');
+                copyFeedback.style.display = 'none';
+                copyButton.style.borderColor = '';
+            }, 2000);
+        });
+    });
+});
+
+</script>
+
+
+</html>

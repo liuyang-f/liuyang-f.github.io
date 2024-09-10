@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Thu, 05 Sep 2024 05:49:02 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>无锁结构-引用计数</title><link>https://liuyang-f.github.io/post/wu-suo-jie-gou---yin-yong-ji-shu.html</link><description>&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Tue, 10 Sep 2024 09:23:08 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>无锁结构-引用计数</title><link>https://liuyang-f.github.io/post/wu-suo-jie-gou---yin-yong-ji-shu.html</link><description>&#13;
 ![image](https://github.com/user-attachments/assets/da490956-5cb4-4c5e-818b-99256f3ada83)&#13;
 &#13;
 ## 两个引用计数：内部计数和外部计数&#13;
@@ -139,18 +139,7 @@ github：https://github.com/dundee/gdu&#13;
 github：https://github.com/HandBrake/HandBrake&#13;
 - 移动端的远程终端工具&#13;
 github：https://github.com/mobile-shell/mosh&#13;
-&#13;
-&#13;
-### **1、windows 磁盘分析工具 SpaceSniffer【[下载链接](https://www.fosshub.com/SpaceSniffer.html)】**&#13;
-推荐二： **WizTree** https://diskanalyzer.com&#13;
-_在Linux下，利用 du 命令 轻松查询目录的大小！非常方便！_&#13;
-`du -sh –max-depth=1 * `&#13;
-&#13;
-### **2、windows 文件搜索工具 Everything 【[下载链接](https://www.voidtools.com/zh-cn/downloads)】**&#13;
-文件搜索神器！&#13;
-&#13;
-### **3、PDF 转换工具 PDFgear【[下载链接](https://www.pdfgear.com/zh/)】**&#13;
-PDF 与 Word、PPT、Excel、PNG、网页、XML 之间互相转换。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/yi-xie-hao-yong-de-ruan-jian-gong-ju.html</guid><pubDate>Tue, 02 Apr 2024 07:24:05 +0000</pubDate></item><item><title>修复老照片的AI工具</title><link>https://liuyang-f.github.io/post/xiu-fu-lao-zhao-pian-de-AI-gong-ju.html</link><description>原文链接：【[链接一](https://www.freedidi.com/11907.html)】【[链接二](https://www.freedidi.com/7749.html)】&#13;
+- AI 换脸和增强工具，支持将图片/视频中的人脸替换成另一个人的脸、改善人脸和背景清晰度等功能。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/yi-xie-hao-yong-de-ruan-jian-gong-ju.html</guid><pubDate>Tue, 02 Apr 2024 07:24:05 +0000</pubDate></item><item><title>修复老照片的AI工具</title><link>https://liuyang-f.github.io/post/xiu-fu-lao-zhao-pian-de-AI-gong-ju.html</link><description>原文链接：【[链接一](https://www.freedidi.com/11907.html)】【[链接二](https://www.freedidi.com/7749.html)】&#13;
 &#13;
 **方案一：免费的修复平台，优点是即开即用，完全免费，缺点是速度有点慢，功能有限。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/xiu-fu-lao-zhao-pian-de-AI-gong-ju.html</guid><pubDate>Thu, 28 Mar 2024 16:51:43 +0000</pubDate></item><item><title>使用GPT-3.5生成思维导图的方法</title><link>https://liuyang-f.github.io/post/shi-yong-GPT-3.5-sheng-cheng-si-wei-dao-tu-de-fang-fa.html</link><description># 步骤1:&#13;
 &#13;

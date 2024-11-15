@@ -1,5 +1,11 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Mon, 11 Nov 2024 08:53:56 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>future的基本理解</title><link>https://liuyang-f.github.io/post/future-de-ji-ben-li-jie.html</link><description>## 认识std::future&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Fri, 15 Nov 2024 08:13:29 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>消息传递框架&lt;一&gt;</title><link>https://liuyang-f.github.io/post/xiao-xi-chuan-di-kuang-jia---yi--.html</link><description>&#13;
+## 常规做法&#13;
+一般在多线程间传递消息，我们会这样实现：&#13;
+1. 使用枚举或者宏定义消息id，然后使用固定结构体包装起来，结构体包含id和其他内容；&#13;
+2. 使用std中的容器保存结构体对象，发送端push数据到容器中，接收者pop数据后使用；&#13;
+3. 再加上锁和条件变量，实现生产者和消费者的异步通知机制；&#13;
+这样的实现方式，使用id值判断不同的消息类型，从而处理不同的任务。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/xiao-xi-chuan-di-kuang-jia---yi--.html</guid><pubDate>Fri, 15 Nov 2024 08:12:59 +0000</pubDate></item><item><title>future的基本理解</title><link>https://liuyang-f.github.io/post/future-de-ji-ben-li-jie.html</link><description>## 认识std::future&#13;
 它是一种类型，让两个线程间以某种方式同步信息，比如一个线程设置了变量值或者执行了函数，另一个线程可以借助future获取对应变量值或者函数执行的结果。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/future-de-ji-ben-li-jie.html</guid><pubDate>Mon, 11 Nov 2024 08:53:32 +0000</pubDate></item><item><title>base64编码</title><link>https://liuyang-f.github.io/post/base64-bian-ma.html</link><description># 起因&#13;
 通常在qml中，Image控件的source属性赋值，都是使用“qrc:/path/../xxx.png”的方式内嵌的qt的资源系统，今天发现一种新的写法：&#13;
 ```&#13;

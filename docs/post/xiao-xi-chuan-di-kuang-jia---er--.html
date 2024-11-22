@@ -10,10 +10,22 @@
         let theme = localStorage.getItem("meek_theme") || "light";
         document.documentElement.setAttribute("data-color-mode", theme);
     </script>
-<meta name="description" content="## 消息的分发
+<meta name="description" content="_**内容来源**_
+  - 书籍：《C++ Concurrencyin Action》
+  - 章节：appendix C（附录C）
+  - 标题：A message-passingframework and complete ATM example（一个消息传递框架与完整的ATM示例）
+  - 中文翻译链接：https://github.com/xiaoweiChen/CPP-Concurrency-In-Action-2ed-2019/blob/master/content/appendix_C/C.0-chinese.md
+
+## 消息的分发
 receiver类用于接收消息，然后在wait中分发消息。">
 <meta property="og:title" content="消息传递框架<二>">
-<meta property="og:description" content="## 消息的分发
+<meta property="og:description" content="_**内容来源**_
+  - 书籍：《C++ Concurrencyin Action》
+  - 章节：appendix C（附录C）
+  - 标题：A message-passingframework and complete ATM example（一个消息传递框架与完整的ATM示例）
+  - 中文翻译链接：https://github.com/xiaoweiChen/CPP-Concurrency-In-Action-2ed-2019/blob/master/content/appendix_C/C.0-chinese.md
+
+## 消息的分发
 receiver类用于接收消息，然后在wait中分发消息。">
 <meta property="og:type" content="article">
 <meta property="og:url" content="https://liuyang-f.github.io/post/xiao-xi-chuan-di-kuang-jia---er--.html">
@@ -85,7 +97,14 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 </div>
 </div>
     <div id="content">
-<div class="markdown-body" id="postBody"><h2>消息的分发</h2>
+<div class="markdown-body" id="postBody"><p><em><strong>内容来源</strong></em></p>
+<ul>
+<li>书籍：《C++ Concurrencyin Action》</li>
+<li>章节：appendix C（附录C）</li>
+<li>标题：A message-passingframework and complete ATM example（一个消息传递框架与完整的ATM示例）</li>
+<li>中文翻译链接：<a href="https://github.com/xiaoweiChen/CPP-Concurrency-In-Action-2ed-2019/blob/master/content/appendix_C/C.0-chinese.md">https://github.com/xiaoweiChen/CPP-Concurrency-In-Action-2ed-2019/blob/master/content/appendix_C/C.0-chinese.md</a></li>
+</ul>
+<h2>消息的分发</h2>
 <p>receiver类用于接收消息，然后在wait中分发消息。处理流程：</p>
 <ul>
 <li>wait函数会返回dispatcher临时对象；</li>

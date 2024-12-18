@@ -1,5 +1,27 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Fri, 13 Dec 2024 03:27:17 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>消息传递框架&lt;三&gt;</title><link>https://liuyang-f.github.io/post/xiao-xi-chuan-di-kuang-jia---san--.html</link><description>_**内容来源**_&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Wed, 18 Dec 2024 08:02:26 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>cmake如何找到Qt模块</title><link>https://liuyang-f.github.io/post/cmake-ru-he-zhao-dao-Qt-mo-kuai.html</link><description>## 范例：camke加载QtCore和QtWidgets&#13;
+- 1、使用`find_package`查找Qt5的组件QtCore和QtWidgets；&#13;
+- 2、使用`target_link_libraries`链接`Qt5::Core`和`Qt5::Widgets`;&#13;
+```&#13;
+cmake_minimum_required(VERSION 3.10)&#13;
+&#13;
+project(MyQtProject)&#13;
+&#13;
+# 查找 Qt5（包名） 的特定组件 QtCore（模块名或者组件名） 和 QtWidgets（模块名或者组件名）；&#13;
+# REQUIRED 表示这个包时必须的；&#13;
+find_package(Qt5 REQUIRED COMPONENTS Core Widgets)&#13;
+&#13;
+# 查找成功后，使用这些组件&#13;
+add_executable(MyApp main.cpp)&#13;
+&#13;
+# 链接 QtCore 和 QtWidgets 库&#13;
+target_link_libraries(MyApp Qt5::Core Qt5::Widgets)&#13;
+&#13;
+```&#13;
+&#13;
+## find_package的三种查找模式&#13;
+- 1、模块模式（Module mode）&#13;
+  - 在 cmake 模块自己路径中，查找 `Find&lt;PackageName&gt;.cmake` 文件，文件由 camke 官方提供，不够灵活，使用较少。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/cmake-ru-he-zhao-dao-Qt-mo-kuai.html</guid><pubDate>Wed, 18 Dec 2024 08:02:03 +0000</pubDate></item><item><title>消息传递框架&lt;三&gt;</title><link>https://liuyang-f.github.io/post/xiao-xi-chuan-di-kuang-jia---san--.html</link><description>_**内容来源**_&#13;
   - 书籍：《C++ Concurrencyin Action》&#13;
   - 章节：appendix C（附录C）&#13;
   - 标题：A message-passingframework and complete ATM example（一个消息传递框架与完整的ATM示例）&#13;

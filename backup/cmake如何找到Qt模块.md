@@ -21,6 +21,7 @@ target_link_libraries(MyApp Qt5::Core Qt5::Widgets)
 ## find_package的三种查找模式
 - 1、模块模式（Module mode）
   - 在 cmake 模块自己路径中，查找 `Find<PackageName>.cmake` 文件，文件由 camke 官方提供，不够灵活，使用较少。
+  - 比如cmake提供的SQLite3库：`/usr/share/cmake-3.16/Modules/FindSQLite3.cmake`。
 - 2、配置模式（Config mode）
   - 在通过 CMAKE_PREFIX_PATH 指定的路径中查找 `<PackageName>Config.cmake` 或 `<PackageName>-config.cmake` 文件，文件由包的开发者提供，比较通用，qt 使用这种方式；
 - 3、源码构建模式（FetchContent redirection mode）

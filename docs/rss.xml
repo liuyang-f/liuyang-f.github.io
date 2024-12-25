@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Wed, 18 Dec 2024 08:02:26 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>cmake如何找到Qt模块</title><link>https://liuyang-f.github.io/post/cmake-ru-he-zhao-dao-Qt-mo-kuai.html</link><description>## 范例：camke加载QtCore和QtWidgets&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Wed, 25 Dec 2024 08:23:16 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>cmake如何找到Qt模块</title><link>https://liuyang-f.github.io/post/cmake-ru-he-zhao-dao-Qt-mo-kuai.html</link><description>## 范例：camke加载QtCore和QtWidgets&#13;
 - 1、使用`find_package`查找Qt5的组件QtCore和QtWidgets；&#13;
 - 2、使用`target_link_libraries`链接`Qt5::Core`和`Qt5::Widgets`;&#13;
 ```&#13;
@@ -174,6 +174,7 @@ github：https://github.com/JoeanAmier/XHS-Downloader&#13;
 - 基于 python 的网页自动化工具（控制浏览器）&#13;
 【方法一】官网：https://drissionpage.cn  github：https://github.com/g1879/DrissionPage&#13;
 【方法二】 github：https://github.com/mherrmann/helium&#13;
+【方法三】 github：https://github.com/tebelorg/RPA-Python&#13;
 - 语音转文字&#13;
 github：https://github.com/chidiwilliams/buzz&#13;
 - 直播平台聚合工具&#13;

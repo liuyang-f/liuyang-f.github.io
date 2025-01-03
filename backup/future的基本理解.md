@@ -1,6 +1,6 @@
 ## 认识std::future
 它是一种类型，让两个线程间以某种方式同步信息，比如一个线程设置了变量值或者执行了函数，另一个线程可以借助future获取对应变量值或者函数执行的结果。
-- 往往使用async、promise::get_future、promise::get_future产生对象，默认构造的对象是invalid。
+- 往往使用async、promise::get_future、packaged_task::get_future产生对象，默认构造的对象是invalid。
 - 使用get能获取另一个线程传递的值或者结果，并且只能调用一次。
 - wait函数会阻塞本线程，等待另一个线程传递变量值或者结果。
 - wait_for和wait_until的返回值为future_status::deferred时，说明使用了std::async并且设置参数为std::launch::deferred。

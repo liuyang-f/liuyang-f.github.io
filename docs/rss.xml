@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Fri, 11 Apr 2025 08:54:58 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>cmake如何找到Qt模块</title><link>https://liuyang-f.github.io/post/cmake-ru-he-zhao-dao-Qt-mo-kuai.html</link><description>## 范例：camke加载QtCore和QtWidgets&#13;
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Wed, 04 Jun 2025 03:25:03 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>cmake如何找到Qt模块</title><link>https://liuyang-f.github.io/post/cmake-ru-he-zhao-dao-Qt-mo-kuai.html</link><description>## 范例：camke加载QtCore和QtWidgets&#13;
 - 1、使用`find_package`查找Qt5的组件QtCore和QtWidgets；&#13;
 - 2、使用`target_link_libraries`链接`Qt5::Core`和`Qt5::Widgets`;&#13;
 ```&#13;
@@ -140,83 +140,8 @@ https://github.com/xiaoweiChen/CPP-Concurrency-In-Action-2ed-2019&#13;
 &#13;
 。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/yi-ge-gong-ju-%EF%BC%9A-yin-pin-%E3%80%81-shi-ping-zhuan-wen-zi.html</guid><pubDate>Tue, 23 Apr 2024 08:33:29 +0000</pubDate></item><item><title>一些好用的软件工具</title><link>https://liuyang-f.github.io/post/yi-xie-hao-yong-de-ruan-jian-gong-ju.html</link><description>[deepseek提示词.txt](https://github.com/user-attachments/files/18794067/deepseek.txt)
 
-【近期收录的资源网站】
-- TVBOX相关：https://iptvindex.com/
-- 学习资料汇总：https://tuostudy.com
-- github代码爬取：https://grep.app
-- github项目推荐：https://hellogithub.com
-- 全英文的 crack 工具：https://freeprosoftz.com 、 https://www.thepiratecity.co
-- 网盘搜索神器：https://www.chaonengsou.com 、https://www.xuebapan.com
-- 发现AI工具：https://top.aibase.com
-- zlibrary &amp; bookcrossing：http://zlibrary.ml 、 https://zlib.pro 、 https://www.bookcrossing.com
-- 工具推荐博客： https://coderschool.cn
-- 学习写shader的网站：https://www.shadertoy.com
-- godbolt 反汇编，理解编译器行为，可以针对 x86、ARM、ARM64 和 PowerPC；也可以分享代码；
-网站：https://gcc.godbolt.org
- [rust/c++内存序参考](https://stackoverflow.com/questions/30407121/which-stdsyncatomicordering-to-use)
-- 大佬博客网站（读书、感悟、修心、认知）：https://manateelazycat.github.io
-
-【github项目收藏】
-- github加速代理服务器
-github：https://github.com/hunshcn/gh-proxy
-- 很多资料，各种工具网站
-github：https://github.com/hoochanlon/hamulete
-- 内网穿透和远程访问
-github：https://github.com/rustdesk/rustdesk
-github：https://github.com/rustdesk/rustdesk-server
-github：https://github.com/tailscale/tailscale
-github：https://github.com/TigerVNC/tigervnc
-- CloudSaver，网盘资源搜索转存工具
-github：https://github.com/jiangrui1994/CloudSaver
-- PC 端微信缓存文件清空软件 
-github：https://github.com/blackboxo/CleanMyWechat
-- PC 端微信缓存数据导出、还原工具
-官网：https://memotrace.cn/
-github：https://github.com/LC044/WeChatMsg
-- TikTok（抖音）下载工具
-github：https://github.com/JoeanAmier/TikTokDownloader
-- 小红书作品采集器
-github：https://github.com/JoeanAmier/XHS-Downloader
-- 基于 python 的网页自动化工具（控制浏览器）
-【方法一】官网：https://drissionpage.cn  github：https://github.com/g1879/DrissionPage
-【方法二】 github：https://github.com/mherrmann/helium
-【方法三】 github：https://github.com/tebelorg/RPA-Python
-【方法四】 https://github.com/seleniumbase/SeleniumBase
-【爬虫和自动化】https://github.com/scrapy/scrapy
-【爬虫例子】https://github.com/shengqiangzhang/examples-of-web-crawlers
-- 语音转文字
-github：https://github.com/chidiwilliams/buzz
-- 直播平台聚合工具
-github：https://github.com/xiaoyaocz/dart_simple_live
-- 生成短视频的AI工具
-github：https://github.com/harry0703/MoneyPrinterTurbo
-- 基于 AI 的 Python 爬虫
-github：https://github.com/ScrapeGraphAI/Scrapegraph-ai
-- 极简提示词的文生图工具
-github：https://github.com/lllyasviel/Omost
-- 简单易用的 USB/SD 启动盘制作工具
-github：https://github.com/balena-io/etcher
-- 免费的 Android 电子书阅读器
-github：https://github.com/Anxcye/anx-reader
-- 尊重个人隐私的 Python 元搜索引擎
-github：https://github.com/searxng/searxng
-- 通过浏览器控制多台 Android 设备
-github：https://github.com/DeviceFarmer/stf
-- 让你上瘾的英语学习网站
-github：https://github.com/cuixueshe/earthworm
-- 视频字幕编辑工具
-github：https://github.com/SubtitleEdit/subtitleedit
-- 简化浏览器自动化的 Python 库
-github：https://github.com/mherrmann/helium
-- AI 变声器，支持实时变声、人声和伴奏分离等功能
-github：https://github.com/RVC-Project/Retrieval-based-Voice-Conversion-WebUI
-- 快速查看磁盘使用情况的命令行工具
-github：https://github.com/dundee/gdu
-- 视频转码工具，支持将各种不同格式的视频文件，转换为 MP4 和 MKV 等常见格式
-github：https://github.com/HandBrake/HandBrake
-- 移动端的远程终端工具
-github：https://github.com/mobile-shell/mosh
-- AI 换脸和增强工具，支持将图片/视频中的人脸替换成另一个人的脸、改善人脸和背景清晰度等功能。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/yi-xie-hao-yong-de-ruan-jian-gong-ju.html</guid><pubDate>Tue, 02 Apr 2024 07:24:05 +0000</pubDate></item><item><title>修复老照片的AI工具</title><link>https://liuyang-f.github.io/post/xiu-fu-lao-zhao-pian-de-AI-gong-ju.html</link><description>原文链接：【[链接一](https://www.freedidi.com/11907.html)】【[链接二](https://www.freedidi.com/7749.html)】&#13;
+【待学习内容】
+- ComfyUI 是一个强大且灵活的工具，通过节点化的方式让用户轻松使用 Stable Diffusion 生成 AI 艺术、图像或视频。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/yi-xie-hao-yong-de-ruan-jian-gong-ju.html</guid><pubDate>Tue, 02 Apr 2024 07:24:05 +0000</pubDate></item><item><title>修复老照片的AI工具</title><link>https://liuyang-f.github.io/post/xiu-fu-lao-zhao-pian-de-AI-gong-ju.html</link><description>原文链接：【[链接一](https://www.freedidi.com/11907.html)】【[链接二](https://www.freedidi.com/7749.html)】&#13;
 &#13;
 **方案一：免费的修复平台，优点是即开即用，完全免费，缺点是速度有点慢，功能有限。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/xiu-fu-lao-zhao-pian-de-AI-gong-ju.html</guid><pubDate>Thu, 28 Mar 2024 16:51:43 +0000</pubDate></item><item><title>使用GPT-3.5生成思维导图的方法</title><link>https://liuyang-f.github.io/post/shi-yong-GPT-3.5-sheng-cheng-si-wei-dao-tu-de-fang-fa.html</link><description># 步骤1:&#13;
 &#13;

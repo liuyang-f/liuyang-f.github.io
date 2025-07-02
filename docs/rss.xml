@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Fri, 13 Jun 2025 08:22:44 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>Qt的事件循环</title><link>https://liuyang-f.github.io/post/Qt-de-shi-jian-xun-huan.html</link><description>## 什么是事件循环
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Wed, 02 Jul 2025 12:09:03 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>段永平博客摘录</title><link>https://liuyang-f.github.io/post/duan-yong-ping-bo-ke-zhai-lu.html</link><description>地址：http://nteswjq.blog.163.com/
+
+### 'chains of habit are too light to be felt until they are too heavy to be broken.'
+
+### 投资最重要的是投在你真正懂的东西上。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/duan-yong-ping-bo-ke-zhai-lu.html</guid><pubDate>Wed, 02 Jul 2025 12:08:33 +0000</pubDate></item><item><title>Qt的事件循环</title><link>https://liuyang-f.github.io/post/Qt-de-shi-jian-xun-huan.html</link><description>## 什么是事件循环
 假设有3个线程A、B和C：
 线程A，一个死循环，等待其他线程的事件通知，大部分时间阻塞着；
 线程B、C，需要执行功能时，只需要把事件通知发给线程A，线程A就会解除阻塞，执行B、C想要执行的功能；

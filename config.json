@@ -12,5 +12,5 @@
     "UTC":8,
     "dayTheme":"light",
     "nightTheme":"dark_colorblind",
-    "style":"<style>#postBody{font-size:20px;font-family:KaiTi_GB2312}</style>"
+    "style":"<style>#postBody{font-size:18px;font-family:KaiTi_GB2312}</style>"
 }

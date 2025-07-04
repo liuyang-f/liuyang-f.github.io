@@ -1,8 +1,12 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Thu, 03 Jul 2025 09:56:53 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>段永平博客摘录</title><link>https://liuyang-f.github.io/post/duan-yong-ping-bo-ke-zhai-lu.html</link><description>地址：http://nteswjq.blog.163.com/
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Fri, 04 Jul 2025 03:50:48 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>段永平博客摘录</title><link>https://liuyang-f.github.io/post/duan-yong-ping-bo-ke-zhai-lu.html</link><description>地址：http://nteswjq.blog.163.com/
 
-## 什么人适合做股票投资（2010-02-04）
-（段学长好～我是浙大电机系毕业的，现在在读工程科的PhD。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/duan-yong-ping-bo-ke-zhai-lu.html</guid><pubDate>Wed, 02 Jul 2025 12:08:33 +0000</pubDate></item><item><title>Qt的事件循环</title><link>https://liuyang-f.github.io/post/Qt-de-shi-jian-xun-huan.html</link><description>## 什么是事件循环
+## I shot 70 today! (2006-11-20 )
+I shot 70 today with 1 double,3 bogies, 4 birdies and an eagle. It's the best score I have ever got.
+
+Life is just like golf, you can have some good shots and bad shots, but no matter whatever you get, you can always enjoy it.
+
+理解：高尔夫有时候打的好，有时候打的坏，生活是如此，股市亦是如此，即使什么没有得到，你总是可以享受其中。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/duan-yong-ping-bo-ke-zhai-lu.html</guid><pubDate>Wed, 02 Jul 2025 12:08:33 +0000</pubDate></item><item><title>Qt的事件循环</title><link>https://liuyang-f.github.io/post/Qt-de-shi-jian-xun-huan.html</link><description>## 什么是事件循环
 假设有3个线程A、B和C：
 线程A，一个死循环，等待其他线程的事件通知，大部分时间阻塞着；
 线程B、C，需要执行功能时，只需要把事件通知发给线程A，线程A就会解除阻塞，执行B、C想要执行的功能；

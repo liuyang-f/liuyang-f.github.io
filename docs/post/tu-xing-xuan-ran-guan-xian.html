@@ -88,7 +88,14 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <li>2、核心渲染模式（(Core-profile mode）：允许开发人员定制化GPU的渲染方式。</li>
 </ul>
 <h2>渲染流程</h2>
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/b4ef01e1-031f-4196-9450-d82438b16cc2"><img width="569" height="388" alt="Image" src="https://github.com/user-attachments/assets/b4ef01e1-031f-4196-9450-d82438b16cc2" style="max-width: 100%; height: auto; max-height: 388px;"></a></p></div>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/b4ef01e1-031f-4196-9450-d82438b16cc2"><img width="569" height="388" alt="Image" src="https://github.com/user-attachments/assets/b4ef01e1-031f-4196-9450-d82438b16cc2" style="max-width: 100%; height: auto; max-height: 388px;"></a></p>
+<h2>坐标变换（Coordinate Transform）</h2>
+<ul>
+<li>顶点着色器用来处理输入的顶点数据，主要用来进行顶点坐标变换以及顶点着色。</li>
+<li>从输入的顶点局部坐标到最终的屏幕坐标需要经过一系列的坐标变换，才能最终显示<br>
+到屏幕上。</li>
+</ul>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/07971458-068f-44f6-9759-f0332df06c49"><img width="569" height="599" alt="Image" src="https://github.com/user-attachments/assets/07971458-068f-44f6-9759-f0332df06c49" style="max-width: 100%; height: auto; max-height: 599px;"></a></p></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>

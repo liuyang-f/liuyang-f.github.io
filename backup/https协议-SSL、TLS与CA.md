@@ -15,6 +15,8 @@
 - 把添加了加密及认证机制的 http 称为 https（HTTP Secure）。
 - https协议并非应用层一种新的协议。只是 HTTP 通信接口部分用 SSL（Secure Socket Layer） 和 TLS（Transport Layer Security） 协议代替而已。
 
+<img width="597" height="294" alt="Image" src="https://github.com/user-attachments/assets/62cb473e-c2db-4cb4-aff2-3b1555099586" />
+
 ## 两种加密技术
 - 公开密钥加密（非对称加密）：使用公钥加密，私钥解密。或者私钥签名，公钥验证签名。安全，但是效率低。
 - 共享密钥加密（对称加密）：加密和解密用同一个密钥。不安全，密钥容易泄露，但效率高。

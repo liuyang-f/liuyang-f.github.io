@@ -6,9 +6,8 @@
 
 ## 1、顶层目录文件`.qmake.conf`
   - 示例文件：https://github.com/emqx/qmqtt/blob/master/.qmake.conf
-  - 该文件是顶层的隐藏文件，QT编译的时候会自动加载该文件，如果没有识别到该文件会对应的提示，比如：
+  - 该文件是顶层的隐藏文件，QT编译的时候会自动加载该文件，如果没有识别到该文件会对应的提示；在https://github.com/mburakov/qt5/blob/master/qtbase/mkspecs/features/qt_build_paths.prf 中有这样的处理：
   ```
-	\\https://github.com/mburakov/qt5/blob/master/qtbase/mkspecs/features/qt_build_paths.prf
     # Find the module's source root dir.
 	isEmpty(_QMAKE_CONF_): error("Project has no top-level .qmake.conf file.")
   ```

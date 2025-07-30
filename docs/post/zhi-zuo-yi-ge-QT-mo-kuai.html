@@ -94,10 +94,9 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 <h2>1、顶层目录文件<code class="notranslate">.qmake.conf</code></h2>
 <ul>
 <li>示例文件：<a href="https://github.com/emqx/qmqtt/blob/master/.qmake.conf">https://github.com/emqx/qmqtt/blob/master/.qmake.conf</a></li>
-<li>该文件是顶层的隐藏文件，QT编译的时候会自动加载该文件，如果没有识别到该文件会对应的提示，比如：</li>
+<li>该文件是顶层的隐藏文件，QT编译的时候会自动加载该文件，如果没有识别到该文件会对应的提示；在<a href="https://github.com/mburakov/qt5/blob/master/qtbase/mkspecs/features/qt_build_paths.prf">https://github.com/mburakov/qt5/blob/master/qtbase/mkspecs/features/qt_build_paths.prf</a> 中有这样的处理：</li>
 </ul>
-<pre class="notranslate"><code class="notranslate">  \\https://github.com/mburakov/qt5/blob/master/qtbase/mkspecs/features/qt_build_paths.prf
-  # Find the module's source root dir.
+<pre class="notranslate"><code class="notranslate">  # Find the module's source root dir.
   isEmpty(_QMAKE_CONF_): error("Project has no top-level .qmake.conf file.")
 </code></pre>
 <ul>

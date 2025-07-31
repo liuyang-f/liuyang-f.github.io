@@ -139,7 +139,7 @@ make: *.mak, *.mk, GNUmakefile, Gnumakefile, Makefile, gnumakefile, makefile
 假如当前目录下有一个文件 <code class="notranslate">my-shell-script</code>，它引用了另一个文件 <code class="notranslate">my-shell-library.bash</code>。<br>
 由于文件<code class="notranslate">my-shell-script</code> 没有扩展名，即使使用 <code class="notranslate">rg --type all</code>，也不会去查找 文件<code class="notranslate">my-shell-script</code>，只会查找文件 <code class="notranslate">my-shell-library.bash</code>。<br>
 另外，使用 <code class="notranslate">rg --type-not all</code> 会搜索文件 <code class="notranslate">my-shell-script</code> ，但不会搜索文件 <code class="notranslate">my-shell-library.bash</code> 。</p>
-<h2>9、搜索二进制文件的3种模式</h2>
+<h2>10、搜索二进制文件的3种模式</h2>
 <ul>
 <li>
 <ol>
@@ -165,7 +165,7 @@ rg 会禁用二进制文件的监测，不会识别二进制文件。</li>
 </ol>
 </li>
 </ul>
-<h2>10、使用预处理器（参数 <code class="notranslate">--pre</code>）</h2>
+<h2>11、使用预处理器（参数 <code class="notranslate">--pre</code>）</h2>
 <p>假如，我们需要搜索 PDF 文件。<br>
 虽然，PDF 文件是一种二进制格式；但是，PDF 中显示的文本可能不是以简单的连续 UTF-8 编码。<br>
 即使，我们传递 <code class="notranslate">-a/--text</code> 标志给 ripgrep，也无法根据关键字搜索到想要的结果。<br>
@@ -208,7 +208,7 @@ sys     0.023
 maxmem  16 MB
 faults  0
 </code></pre>
-<h2>11、使用参数（--pre-glob）过滤减少预处理器的开销</h2>
+<h2>12、使用参数（--pre-glob）过滤减少预处理器的开销</h2>
 <p>因为预处理器是针对每一个文件进行处理了，如果筛选指定文件类型后在使用预处理器，可以提高整体的执行速度。</p>
 <pre class="notranslate"><code class="notranslate">$ time rg --pre pre-rg 'fn is_empty' -c
 crates/globset/src/lib.rs:1

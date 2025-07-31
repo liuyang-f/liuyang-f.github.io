@@ -63,7 +63,7 @@ make: *.mak, *.mk, GNUmakefile, Gnumakefile, Makefile, gnumakefile, makefile
 由于文件`my-shell-script` 没有扩展名，即使使用 `rg --type all`，也不会去查找 文件`my-shell-script`，只会查找文件 `my-shell-library.bash`。
 另外，使用 `rg --type-not all` 会搜索文件 `my-shell-script` ，但不会搜索文件 `my-shell-library.bash` 。
 
-## 9、搜索二进制文件的3种模式
+## 10、搜索二进制文件的3种模式
 - 1. default mode（无参数）
   在非二进制文件中查找关键字。
   rg 会识别二进制文件，然后跳过二进制文件，在其他文件中搜索内容。
@@ -76,7 +76,7 @@ make: *.mak, *.mk, GNUmakefile, Gnumakefile, Makefile, gnumakefile, makefile
   把所有文件当做文本处理，所以在二进制文件找到内容会刷屏终端显示。
   rg 会禁用二进制文件的监测，不会识别二进制文件。
   
-## 10、使用预处理器（参数 `--pre`）
+## 11、使用预处理器（参数 `--pre`）
 假如，我们需要搜索 PDF 文件。
 虽然，PDF 文件是一种二进制格式；但是，PDF 中显示的文本可能不是以简单的连续 UTF-8 编码。
 即使，我们传递 `-a/--text` 标志给 ripgrep，也无法根据关键字搜索到想要的结果。
@@ -124,7 +124,7 @@ maxmem  16 MB
 faults  0
 ```
 
-## 11、使用参数（--pre-glob）过滤减少预处理器的开销
+## 12、使用参数（--pre-glob）过滤减少预处理器的开销
 因为预处理器是针对每一个文件进行处理了，如果筛选指定文件类型后在使用预处理器，可以提高整体的执行速度。
 ```
 $ time rg --pre pre-rg 'fn is_empty' -c

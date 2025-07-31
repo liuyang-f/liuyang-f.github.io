@@ -62,3 +62,94 @@ make: *.mak, *.mk, GNUmakefile, Gnumakefile, Makefile, gnumakefile, makefile
 假如当前目录下有一个文件 `my-shell-script`，它引用了另一个文件 `my-shell-library.bash`。
 由于文件`my-shell-script` 没有扩展名，即使使用 `rg --type all`，也不会去查找 文件`my-shell-script`，只会查找文件 `my-shell-library.bash`。
 另外，使用 `rg --type-not all` 会搜索文件 `my-shell-script` ，但不会搜索文件 `my-shell-library.bash` 。
+
+## 9、搜索二进制文件的3种模式
+- 1. default mode（无参数）
+  在非二进制文件中查找关键字。
+  rg 会识别二进制文件，然后跳过二进制文件，在其他文件中搜索内容。
+- 2. Binary mode（参数：`--binary`）
+  可以搜索所有的文件；不会排除二进制文件的搜索。
+  在二进制文件找到内容不会刷屏终端显示。
+  rg 也会识别二进制文件，但是不会跳过二进制文件搜索内容。
+- 3. Text mode（参数：`-a/--text`）
+  可以搜索所有的文件；不会排除二进制文件的搜索。
+  把所有文件当做文本处理，所以在二进制文件找到内容会刷屏终端显示。
+  rg 会禁用二进制文件的监测，不会识别二进制文件。
+  
+## 10、使用预处理器（参数 `--pre`）
+假如，我们需要搜索 PDF 文件。
+虽然，PDF 文件是一种二进制格式；但是，PDF 中显示的文本可能不是以简单的连续 UTF-8 编码。
+即使，我们传递 `-a/--text` 标志给 ripgrep，也无法根据关键字搜索到想要的结果。
+比如搜索命令：
+```
+$ rg 'The Commentz-Walter algorithm' 1995-watson.pdf
+$
+```
+结果为空的。使用参数 `--pre`可以解决这个问题。
+简单来说，`--pre` 后面可以指定一个 shell 命令，当然也可以是一个 shell 脚本，通过这个明白把 PDF 转为文件执行搜索功能。
+shell 脚本如下：
+```
+$ cat preprocess
+#!/bin/sh
+exec pdftotext - -
+```
+指定 shell 脚本后的搜索结果如下：
+```
+$ rg --pre ./preprocess 'The Commentz-Walter algorithm' 1995-watson.pdf
+316:The Commentz-Walter algorithms : : : : : : : : : : : : : : :
+7165:4.4 The Commentz-Walter algorithms
+10062:in input string S , we obtain the Boyer-Moore algorithm. The Commentz-Walter algorithm
+17218:The Commentz-Walter algorithm (and its variants) displayed more interesting behaviour,
+17249:Aho-Corasick algorithms are used extensively. The Commentz-Walter algorithms are used
+17297: The Commentz-Walter algorithms (CW). In all versions of the CW algorithms, a common program skeleton is used with di erent shift functions. The CW algorithms are
+```
+额外的好处是，这比其他专业的 PDF 搜索工具要快得多：
+```
+$ time rg --pre ./preprocess 'The Commentz-Walter algorithm' 1995-watson.pdf -c
+6
+
+real    0.697
+user    0.684
+sys     0.007
+maxmem  16 MB
+faults  0
+
+$ time pdfgrep 'The Commentz-Walter algorithm' 1995-watson.pdf -c
+6
+
+real    1.336
+user    1.310
+sys     0.023
+maxmem  16 MB
+faults  0
+```
+
+## 11、使用参数（--pre-glob）过滤减少预处理器的开销
+因为预处理器是针对每一个文件进行处理了，如果筛选指定文件类型后在使用预处理器，可以提高整体的执行速度。
+```
+$ time rg --pre pre-rg 'fn is_empty' -c
+crates/globset/src/lib.rs:1
+crates/matcher/src/lib.rs:2
+crates/ignore/src/overrides.rs:1
+crates/ignore/src/gitignore.rs:1
+crates/ignore/src/types.rs:1
+
+real    0.138
+user    0.485
+sys     0.209
+maxmem  7 MB
+faults  0
+
+$ time rg --pre pre-rg --pre-glob '*.pdf' 'fn is_empty' -c
+crates/globset/src/lib.rs:1
+crates/ignore/src/types.rs:1
+crates/ignore/src/gitignore.rs:1
+crates/ignore/src/overrides.rs:1
+crates/matcher/src/lib.rs:2
+
+real    0.008
+user    0.010
+sys     0.002
+maxmem  7 MB
+faults  0
+```

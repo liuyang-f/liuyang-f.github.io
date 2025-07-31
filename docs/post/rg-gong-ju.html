@@ -138,7 +138,104 @@ make: *.mak, *.mk, GNUmakefile, Gnumakefile, Makefile, gnumakefile, makefile
 <p>使用 <code class="notranslate">rg --type all</code> 会搜索 <code class="notranslate">rg --type-list</code> 列出的所有文件类型（有扩展名）。<br>
 假如当前目录下有一个文件 <code class="notranslate">my-shell-script</code>，它引用了另一个文件 <code class="notranslate">my-shell-library.bash</code>。<br>
 由于文件<code class="notranslate">my-shell-script</code> 没有扩展名，即使使用 <code class="notranslate">rg --type all</code>，也不会去查找 文件<code class="notranslate">my-shell-script</code>，只会查找文件 <code class="notranslate">my-shell-library.bash</code>。<br>
-另外，使用 <code class="notranslate">rg --type-not all</code> 会搜索文件 <code class="notranslate">my-shell-script</code> ，但不会搜索文件 <code class="notranslate">my-shell-library.bash</code> 。</p></div>
+另外，使用 <code class="notranslate">rg --type-not all</code> 会搜索文件 <code class="notranslate">my-shell-script</code> ，但不会搜索文件 <code class="notranslate">my-shell-library.bash</code> 。</p>
+<h2>9、搜索二进制文件的3种模式</h2>
+<ul>
+<li>
+<ol>
+<li>default mode（无参数）<br>
+在非二进制文件中查找关键字。<br>
+rg 会识别二进制文件，然后跳过二进制文件，在其他文件中搜索内容。</li>
+</ol>
+</li>
+<li>
+<ol start="2">
+<li>Binary mode（参数：<code class="notranslate">--binary</code>）<br>
+可以搜索所有的文件；不会排除二进制文件的搜索。<br>
+在二进制文件找到内容不会刷屏终端显示。<br>
+rg 也会识别二进制文件，但是不会跳过二进制文件搜索内容。</li>
+</ol>
+</li>
+<li>
+<ol start="3">
+<li>Text mode（参数：<code class="notranslate">-a/--text</code>）<br>
+可以搜索所有的文件；不会排除二进制文件的搜索。<br>
+把所有文件当做文本处理，所以在二进制文件找到内容会刷屏终端显示。<br>
+rg 会禁用二进制文件的监测，不会识别二进制文件。</li>
+</ol>
+</li>
+</ul>
+<h2>10、使用预处理器（参数 <code class="notranslate">--pre</code>）</h2>
+<p>假如，我们需要搜索 PDF 文件。<br>
+虽然，PDF 文件是一种二进制格式；但是，PDF 中显示的文本可能不是以简单的连续 UTF-8 编码。<br>
+即使，我们传递 <code class="notranslate">-a/--text</code> 标志给 ripgrep，也无法根据关键字搜索到想要的结果。<br>
+比如搜索命令：</p>
+<pre class="notranslate"><code class="notranslate">$ rg 'The Commentz-Walter algorithm' 1995-watson.pdf
+$
+</code></pre>
+<p>结果为空的。使用参数 <code class="notranslate">--pre</code>可以解决这个问题。<br>
+简单来说，<code class="notranslate">--pre</code> 后面可以指定一个 shell 命令，当然也可以是一个 shell 脚本，通过这个明白把 PDF 转为文件执行搜索功能。<br>
+shell 脚本如下：</p>
+<pre class="notranslate"><code class="notranslate">$ cat preprocess
+#!/bin/sh
+exec pdftotext - -
+</code></pre>
+<p>指定 shell 脚本后的搜索结果如下：</p>
+<pre class="notranslate"><code class="notranslate">$ rg --pre ./preprocess 'The Commentz-Walter algorithm' 1995-watson.pdf
+316:The Commentz-Walter algorithms : : : : : : : : : : : : : : :
+7165:4.4 The Commentz-Walter algorithms
+10062:in input string S , we obtain the Boyer-Moore algorithm. The Commentz-Walter algorithm
+17218:The Commentz-Walter algorithm (and its variants) displayed more interesting behaviour,
+17249:Aho-Corasick algorithms are used extensively. The Commentz-Walter algorithms are used
+17297: The Commentz-Walter algorithms (CW). In all versions of the CW algorithms, a common program skeleton is used with di erent shift functions. The CW algorithms are
+</code></pre>
+<p>额外的好处是，这比其他专业的 PDF 搜索工具要快得多：</p>
+<pre class="notranslate"><code class="notranslate">$ time rg --pre ./preprocess 'The Commentz-Walter algorithm' 1995-watson.pdf -c
+6
+
+real    0.697
+user    0.684
+sys     0.007
+maxmem  16 MB
+faults  0
+
+$ time pdfgrep 'The Commentz-Walter algorithm' 1995-watson.pdf -c
+6
+
+real    1.336
+user    1.310
+sys     0.023
+maxmem  16 MB
+faults  0
+</code></pre>
+<h2>11、使用参数（--pre-glob）过滤减少预处理器的开销</h2>
+<p>因为预处理器是针对每一个文件进行处理了，如果筛选指定文件类型后在使用预处理器，可以提高整体的执行速度。</p>
+<pre class="notranslate"><code class="notranslate">$ time rg --pre pre-rg 'fn is_empty' -c
+crates/globset/src/lib.rs:1
+crates/matcher/src/lib.rs:2
+crates/ignore/src/overrides.rs:1
+crates/ignore/src/gitignore.rs:1
+crates/ignore/src/types.rs:1
+
+real    0.138
+user    0.485
+sys     0.209
+maxmem  7 MB
+faults  0
+
+$ time rg --pre pre-rg --pre-glob '*.pdf' 'fn is_empty' -c
+crates/globset/src/lib.rs:1
+crates/ignore/src/types.rs:1
+crates/ignore/src/gitignore.rs:1
+crates/ignore/src/overrides.rs:1
+crates/matcher/src/lib.rs:2
+
+real    0.008
+user    0.010
+sys     0.002
+maxmem  7 MB
+faults  0
+</code></pre></div>
 <div style="font-size:small;margin-top:8px;float:right;"></div>
 
 <button class="btn btn-block" type="button" onclick="openComments()" id="cmButton">评论</button>

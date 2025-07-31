@@ -51,7 +51,7 @@ make: *.mak, *.mk, GNUmakefile, Gnumakefile, Makefile, gnumakefile, makefile
 那么你会在列表中看到你的 web 类型出现，即使它不是 ripgrep 的内置类型的一部分。
 
 ## 8、保存添加的自定义文件类型
-一般来说，使用 `--type-add` 添加的自定义文件类型，只能在当前的命名终端使用。
+一般来说，使用 `--type-add` 添加的自定义文件类型，只能在当前的终端下使用。
 如何设置能够保证在其他终端也可以使用？
 方法一：创建一个 shell 别名
 `alias rg="rg --type-add 'web:*.{html,css,js}'"`

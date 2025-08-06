@@ -99,8 +99,8 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 // * 匹配任意字符但不跨目录，** 可以跨目录匹配任意层级的子路径。
 // src/**/*.cpp：匹配 src/xxx.cpp、src/a/b/c/main.cpp
 // **/*.h：匹配所有子目录下的 .h 文件
-&gt; fd -p -g '**/.git/config' # 
-&gt; fd -p '.*/lesson-\d+/[a-z]+.(jpg|png)' # 
+&gt; fd -p -g '**/.git/config' # 有 -g 参数，单引号中的字符串是 通配符表达式
+&gt; fd -p '.*/lesson-\d+/[a-z]+.(jpg|png)' #  没有 -g 参数，单引号中的字符串是 正则表达式
 </code></pre>
 <p>2、查找隐藏文件（-H）和 ignore 文件（-I）<br>
 fd 默认不搜索隐藏目录和隐藏文件；也不搜索符合 .gitignore 模式之一的文件夹。</p>

@@ -16,8 +16,8 @@ fd 可以根据关键字，递归查找指定目录中的文件。
 // * 匹配任意字符但不跨目录，** 可以跨目录匹配任意层级的子路径。
 // src/**/*.cpp：匹配 src/xxx.cpp、src/a/b/c/main.cpp
 // **/*.h：匹配所有子目录下的 .h 文件
-> fd -p -g '**/.git/config' # 
-> fd -p '.*/lesson-\d+/[a-z]+.(jpg|png)' # 
+> fd -p -g '**/.git/config' # 有 -g 参数，单引号中的字符串是 通配符表达式
+> fd -p '.*/lesson-\d+/[a-z]+.(jpg|png)' #  没有 -g 参数，单引号中的字符串是 正则表达式
 ```
 
 2、查找隐藏文件（-H）和 ignore 文件（-I）

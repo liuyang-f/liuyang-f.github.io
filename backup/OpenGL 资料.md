@@ -4,6 +4,9 @@ http://editor.thebookofshaders.com/
 ### shader学习
 https://thebookofshaders.com/01/?lan=ch
 
+### 学习写shader的网站
+https://www.shadertoy.com
+
 ### OpenGL 学习文档
 https://learnopengl-cn.github.io/
 

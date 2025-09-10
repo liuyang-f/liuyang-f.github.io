@@ -1,12 +1,11 @@
-### 测试shader的网站
-http://editor.thebookofshaders.com/
+### 绘制数学函数图形（2D、3D）
+https://www.desmos.com
 
-### shader学习
-https://thebookofshaders.com/01/?lan=ch
-
-### 学习shader的网站
-shader素材：https://www.shadertoy.com
-shadertoy教程：https://shadertoy.peakcoder.com
+### shader 相关
+测试shader的网站：http://editor.thebookofshaders.com
+学习shader：https://thebookofshaders.com/01/?lan=ch
+shadertoy 素材：https://www.shadertoy.com
+shadertoy 教程：https://shadertoy.peakcoder.com
 
 ### OpenGL 学习文档
 https://learnopengl-cn.github.io/

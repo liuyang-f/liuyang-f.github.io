@@ -1,5 +1,6 @@
-### 绘制数学函数图形（2D、3D）
-https://www.desmos.com
+### 数学相关
+数学函数和公式：https://mathworld.wolfram.com
+绘制数学函数图形（2D、3D）：https://www.desmos.com
 
 ### shader 相关
 测试shader的网站：http://editor.thebookofshaders.com

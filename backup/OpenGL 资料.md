@@ -10,8 +10,11 @@
 shadertoy 素材：https://www.shadertoy.com
 shadertoy 教程：https://shadertoy.peakcoder.com
 
-### OpenGL 学习文档
-https://learnopengl-cn.github.io/
+### OpenGL 相关
+官网：https://www.khronos.org
+wiki页面：https://www.khronos.org/opengl/wiki
+中文教程：https://learnopengl-cn.github.io
+
 
 ### qt quick 3d 实现车道线过程
 https://www.zhihu.com/column/c_1610307028638945280

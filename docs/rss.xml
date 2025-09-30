@@ -1,5 +1,9 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Mon, 15 Sep 2025 12:05:29 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>OpenGL 资料</title><link>https://liuyang-f.github.io/post/OpenGL%20-zi-liao.html</link><description>## 计算机图形学相关的文章、视频、博客，代码：https://iquilezles.org
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Tue, 30 Sep 2025 07:32:04 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>GLSL中常用函数</title><link>https://liuyang-f.github.io/post/GLSL-zhong-chang-yong-han-shu.html</link><description>**_未完成_**
+
+## 1、step 函数
+  - 原型：Type step(Type edge, Type x)
+  - 参数：无要求。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/GLSL-zhong-chang-yong-han-shu.html</guid><pubDate>Tue, 30 Sep 2025 07:31:35 +0000</pubDate></item><item><title>OpenGL 资料</title><link>https://liuyang-f.github.io/post/OpenGL%20-zi-liao.html</link><description>## 计算机图形学相关的文章、视频、博客，代码：https://iquilezles.org
 
 ### 数学相关
 数学函数和公式：https://mathworld.wolfram.com

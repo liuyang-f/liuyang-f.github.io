@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Tue, 14 Oct 2025 09:47:05 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>巴菲特名言</title><link>https://liuyang-f.github.io/post/ba-fei-te-ming-yan.html</link><description>&gt;&gt; 1. “Chains of habit are too light to be felt until they are too heavy to be broken.”
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Mon, 20 Oct 2025 11:48:54 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>巴菲特名言</title><link>https://liuyang-f.github.io/post/ba-fei-te-ming-yan.html</link><description>&gt;&gt; 1. “Chains of habit are too light to be felt until they are too heavy to be broken.”
 
 &gt;&gt; 2. “If you let yourself be undisciplined on the small things, you will probably be undisciplined on the large things as well.”。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/ba-fei-te-ming-yan.html</guid><pubDate>Thu, 09 Oct 2025 06:50:35 +0000</pubDate></item><item><title>GLSL中常用函数</title><link>https://liuyang-f.github.io/post/GLSL-zhong-chang-yong-han-shu.html</link><description>**_未完成_**
 
@@ -154,13 +154,7 @@ https://github.com/qmlbook/qt6book。</description><guid isPermaLink="true">http
 ## 应用程序层
 - 作用：应用程序是用户直接交互的程序，负责具体的图形内容（如按钮、文字、图像）。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/Linux%20-de-tu-xing-hui-zhi-xi-tong.html</guid><pubDate>Mon, 07 Jul 2025 08:34:42 +0000</pubDate></item><item><title>段永平博客摘录</title><link>https://liuyang-f.github.io/post/duan-yong-ping-bo-ke-zhai-lu.html</link><description>地址：http://nteswjq.blog.163.com
 段永平采访视频：http://money.163.com/special/002547UV/cjhktdyp.html
-
-## I shot 70 today! (2006-11-20 )
-I shot 70 today with 1 double,3 bogies, 4 birdies and an eagle. It's the best score I have ever got.
-
-Life is just like golf, you can have some good shots and bad shots, but no matter whatever you get, you can always enjoy it.
-
-理解：高尔夫有时候打的好，有时候打的坏，生活是如此，股市亦是如此，即使什么没有得到，你总是可以享受其中。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/duan-yong-ping-bo-ke-zhai-lu.html</guid><pubDate>Wed, 02 Jul 2025 12:08:33 +0000</pubDate></item><item><title>Qt的事件循环</title><link>https://liuyang-f.github.io/post/Qt-de-shi-jian-xun-huan.html</link><description>## 什么是事件循环
+段永平推荐书籍：《基业长青》、《优秀到卓越》、《赢》，巴菲特，韦尔奇的自传。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/duan-yong-ping-bo-ke-zhai-lu.html</guid><pubDate>Wed, 02 Jul 2025 12:08:33 +0000</pubDate></item><item><title>Qt的事件循环</title><link>https://liuyang-f.github.io/post/Qt-de-shi-jian-xun-huan.html</link><description>## 什么是事件循环
 假设有3个线程A、B和C：
 线程A，一个死循环，等待其他线程的事件通知，大部分时间阻塞着；
 线程B、C，需要执行功能时，只需要把事件通知发给线程A，线程A就会解除阻塞，执行B、C想要执行的功能；

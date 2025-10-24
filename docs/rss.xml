@@ -1,5 +1,5 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Fri, 24 Oct 2025 03:41:54 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>巴菲特名言</title><link>https://liuyang-f.github.io/post/ba-fei-te-ming-yan.html</link><description>&gt;&gt; 1. “Chains of habit are too light to be felt until they are too heavy to be broken.”
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Fri, 24 Oct 2025 03:45:19 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>巴菲特名言</title><link>https://liuyang-f.github.io/post/ba-fei-te-ming-yan.html</link><description>&gt;&gt; 1. “Chains of habit are too light to be felt until they are too heavy to be broken.”
 
 &gt;&gt; 2. “If you let yourself be undisciplined on the small things, you will probably be undisciplined on the large things as well.”。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/ba-fei-te-ming-yan.html</guid><pubDate>Thu, 09 Oct 2025 06:50:35 +0000</pubDate></item><item><title>GLSL中常用函数</title><link>https://liuyang-f.github.io/post/GLSL-zhong-chang-yong-han-shu.html</link><description>**_未完成_**
 
@@ -21,7 +21,7 @@ shadertoy 教程：https://shadertoy.peakcoder.com
 官网：https://www.khronos.org
 wiki页面：https://www.khronos.org/opengl/wiki
 中文教程：https://learnopengl-cn.github.io
-初学入门博文：https://github.com/yishuinanfeng/opengl-es-study-demo
+初学入门博文（OpenGL ES）：https://github.com/yishuinanfeng/opengl-es-study-demo
 
 
 ### qt quick 3d 实现车道线过程

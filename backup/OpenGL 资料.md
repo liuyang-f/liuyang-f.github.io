@@ -14,6 +14,7 @@ shadertoy 教程：https://shadertoy.peakcoder.com
 官网：https://www.khronos.org
 wiki页面：https://www.khronos.org/opengl/wiki
 中文教程：https://learnopengl-cn.github.io
+初学入门博文：https://github.com/yishuinanfeng/opengl-es-study-demo
 
 
 ### qt quick 3d 实现车道线过程

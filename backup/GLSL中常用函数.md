@@ -28,3 +28,5 @@
     效果等同于 min(max(x, minVal), maxVal)。
   - 使用场景：
 ## 5、length与distance函数
+  - length：向量的长度。
+  - distance：两个点之间的距离。

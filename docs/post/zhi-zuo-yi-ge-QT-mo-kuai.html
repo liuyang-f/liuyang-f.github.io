@@ -142,7 +142,7 @@ body{box-sizing: border-box;min-width: 200px;max-width: 900px;margin: 20px auto;
 headers.pri 文件记录了需要安装的头文件列表；但是自定义的模块，执行<code class="notranslate">make</code>以后，build 目录下没有对应的头文件，headers.pri 文件也没有记录头文件信息。<br>
 很自然的，执行<code class="notranslate">make install</code> 也没有把头文件安装到 Qt 的安装目录中，开发者也就无法导入头文件，不能正常使用这个自定义的模块。<br>
 基于上述这个问题，定位查找原因（找了好久，记录下），发现了两个关键点：</p>
-<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/0df65491-1e26-4119-ac53-114342edc8ed"><img width="1741" height="298" alt="Image" src="https://github.com/user-attachments/assets/0df65491-1e26-4119-ac53-114342edc8ed" style="max-width: 100%; height: auto; max-height: 298px;; aspect-ratio: 1741 / 298; background-color: var(--bgColor-muted); border-radius: 6px; display: block" class="js-gh-image-fallback"></a></p>
+<p><a target="_blank" rel="noopener noreferrer" href="https://github.com/user-attachments/assets/0df65491-1e26-4119-ac53-114342edc8ed"><img width="1741" height="298" alt="Image" src="https://github.com/user-attachments/assets/0df65491-1e26-4119-ac53-114342edc8ed" style="max-width: 100%; height: auto; max-height: 298px;; aspect-ratio: 1741 / 298; background-color: var(--bgColor-muted); border-radius: 6px" class="js-gh-image-fallback"></a></p>
 <ul>
 <li>
 <p>第一个关键点，没有调用 syncqt.pl 脚本</p>

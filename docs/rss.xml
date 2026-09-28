@@ -1,14 +1,14 @@
 <?xml version='1.0' encoding='UTF-8'?>
-<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Wed, 23 Sep 2026 13:32:14 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>OpenGL 中关于 FBO 的理解</title><link>https://liuyang-f.github.io/post/OpenGL%20-zhong-guan-yu-%20FBO%20-de-li-jie.html</link><description>
+<rss xmlns:atom="http://www.w3.org/2005/Atom" xmlns:content="http://purl.org/rss/1.0/modules/content/" version="2.0"><channel><title>千金散尽还复来</title><link>https://liuyang-f.github.io</link><description>探索未知的世界</description><copyright>千金散尽还复来</copyright><docs>http://www.rssboard.org/rss-specification</docs><generator>python-feedgen</generator><image><url>https://github.githubassets.com/favicons/favicon.svg</url><title>avatar</title><link>https://liuyang-f.github.io</link></image><lastBuildDate>Mon, 28 Sep 2026 12:14:09 +0000</lastBuildDate><managingEditor>千金散尽还复来</managingEditor><ttl>60</ttl><webMaster>千金散尽还复来</webMaster><item><title>OpenGL 中关于 FBO 的理解</title><link>https://liuyang-f.github.io/post/OpenGL%20-zhong-guan-yu-%20FBO%20-de-li-jie.html</link><description>
 ## 什么是 FBO
 
-FBO 是应用程序创建的帧缓冲对象。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/OpenGL%20-zhong-guan-yu-%20FBO%20-de-li-jie.html</guid><pubDate>Wed, 23 Sep 2026 13:27:38 +0000</pubDate></item><item><title>OpenGL 中关于纹理的理解</title><link>https://liuyang-f.github.io/post/OpenGL%20-zhong-guan-yu-wen-li-de-li-jie.html</link><description>
+FBO 是应用程序创建的帧缓冲对象。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/OpenGL%20-zhong-guan-yu-%20FBO%20-de-li-jie.html</guid><pubDate>Wed, 23 Sep 2026 13:27:38 +0000</pubDate></item><item><title>OpenGL 概念：纹理</title><link>https://liuyang-f.github.io/post/OpenGL%20-gai-nian-%EF%BC%9A-wen-li.html</link><description>
 
 ## 纹理
 
 - **什么是纹理**
 
-  纹理是 GPU 上的图像对象。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/OpenGL%20-zhong-guan-yu-wen-li-de-li-jie.html</guid><pubDate>Wed, 23 Sep 2026 13:26:32 +0000</pubDate></item><item><title>体验 Qt-for-Android</title><link>https://liuyang-f.github.io/post/ti-yan-%20Qt-for-Android.html</link><description>官方文档：https://doc.qt.io/qt-6/android.html
+  纹理是 GPU 上的图像对象。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/OpenGL%20-gai-nian-%EF%BC%9A-wen-li.html</guid><pubDate>Wed, 23 Sep 2026 13:26:32 +0000</pubDate></item><item><title>体验 Qt-for-Android</title><link>https://liuyang-f.github.io/post/ti-yan-%20Qt-for-Android.html</link><description>官方文档：https://doc.qt.io/qt-6/android.html
 
 **目的：把 Qt 安装目录 Example 中的例子编译生成 APK，安装到 Android 平台运行起来。</description><guid isPermaLink="true">https://liuyang-f.github.io/post/ti-yan-%20Qt-for-Android.html</guid><pubDate>Wed, 29 Apr 2026 08:40:35 +0000</pubDate></item><item><title>读《段永平传》</title><link>https://liuyang-f.github.io/post/du-%E3%80%8A-duan-yong-ping-chuan-%E3%80%8B.html</link><description>**作者**: 孙力科
 

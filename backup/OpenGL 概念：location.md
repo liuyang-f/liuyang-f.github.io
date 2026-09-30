@@ -188,7 +188,7 @@ glBufferData(
 glVertexAttribPointer 连接 vertices 与 shader：
 
 - 第 1 个参数 0,1,2 对应了 shader 中给 aPos、aColor、aUV 设置的 location 值
-- 第 2 个参数是分量个数，分别从 vertices 中取 3、3、2 个 float，对应 aPos、aColor、aUV；shader 中它们的类型刚好也是 vec3、vec3、vec2
+- 第 2 个参数是每个分类数据对应 vertices 中的数据个数；比如分别从 vertices 中取 3、3、2 个 float，对应 aPos、aColor、aUV；shader 中它们的类型刚好也是 vec3、vec3、vec2
 - 第 5 个参数是步进值 stride
   - 步进值决定了取完一组顶点数据后，需要移动多远的距离，取下一组数据
   - vertices 本身是一个按固定格式循环重复的串行数据
